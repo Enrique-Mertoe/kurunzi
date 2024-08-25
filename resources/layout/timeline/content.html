@@ -1,0 +1,167 @@
+{%set tUser = data.tUser %}
+{% set me = tUser.uid == data.user.uid %}
+{% if tUser.is_empty %}
+{% include "timeline/no-user.html" %}
+{% else %}
+
+{%set usermanager = tUser.uid | usermanager %}
+<div class="vstack py-3 timeline-content">
+    <div class="profile-header px-2">
+        <div class="hstack row align-items-start">
+            <div class="col-auto">
+                <div class="vstack align-items-start gap-2">
+                   <div class=" row">
+                       <div class="col-auto">
+                           <div class="avatar avatar-timeline">
+                               <img data-img-zoom src="{{tUser.profile_pic | file_image}}" class="avatar-img"
+                                    alt="{{tUser.fullname}}">
+                           </div>
+                       </div>
+                       <div class="col">
+                           <div class="hstack mt-2 gap-3">
+                               <div class="">
+                                   <span class="fw-bold">{{usermanager.following}}</span><br>
+                                   <span>Following </span>
+                               </div>
+                               <div class="">
+                                   <span class="fw-bold">{{usermanager.followers}}</span><br>
+                                   <span>Followers</span>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                    <div class="smv-border-start vstack gap-2">
+                        <span class="fw-bold text-capitalize">{{tUser.fullname}}</span>
+                        <span class="small text-muted">@{{tUser.username}}</span>
+                        <span class="text-muted hstack align-items-end small">
+                            <i class="me-1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+                                    id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g
+                                    id="SVGRepo_iconCarrier"> <path
+                                    d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"></path> <rect x="6" y="12"
+                                                                                                           width="3"
+                                                                                                           height="3"
+                                                                                                           rx="0.5"
+                                                                                                           fill="currentColor"></rect> <rect
+                                    x="10.5" y="12" width="3" height="3" rx="0.5" fill="currentColor"></rect> <rect x="15"
+                                                                                                               y="12"
+                                                                                                               width="3"
+                                                                                                               height="3"
+                                                                                                               rx="0.5"
+                                                                                                               fill="currentColor"></rect> </g></svg></i>
+                            Joined on: <span class="fw-bold ps-1">{{tUser.joined | joined}}</span></span>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col mt-3">
+                <div class="vstack  ">
+
+                    {% if tUser.bio %}
+                    <span class="mt-3 text-muted text-center w-75">
+                             {{ tUser.bio}}
+                        </span>
+                    {% else %}
+                    <a class="mt-3 text-muted fw-bold small text-decoration-none" href="#">
+                        <i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                 class="bi bi-link-45deg" viewBox="0 0 16 16">
+                                <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"/>
+                                <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"/>
+                            </svg>
+                        </i>
+                        Click to add bio.</a>
+                    {%endif %}
+
+                </div>
+            </div>
+        </div>
+        <div class="hstack gap-4 mt-4">
+            {%if me %}
+            <span data-url="{{url_for('main.settings', st='account')}}" class="btn bg-secondary-soft  rounded-1">
+                    <i class="me-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-pen-fill" viewBox="0 0 16 16">
+                          <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
+                        </svg>
+                    </i>
+                    Edit</span>
+            <span class="btn bg-secondary-soft  rounded-1">Share profile</span>
+            {% else %}
+            <span class="btn btn-secondary  rounded-1">Message</span>
+            <span data-fl="{{tUser.uid}}" class="btn bg-secondary-soft rounded-1">{{'unfollow' if usermanager.follows else 'follow' }}</span>
+            {%endif%}
+            <span class="btn bg-secondary-soft rounded-1">
+                <i class="me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg>
+                </i>
+                activities</span>
+
+        </div>
+
+
+    </div>
+    <div class="mt-1 p-tab-sticky border-bottom">
+        <ul class="nav hs-nav header-nav gap-4">
+            <li class="nav-item">
+                <a data-url="{{url_for('main.index')}}" href="#" class="nav-link active">
+                    <i class=" me-1">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_iconCarrier">
+                                <g id="Menu / More_Grid_Big">
+                                    <g id="Vector">
+                                        <path d="M17 18C17 18.5523 17.4477 19 18 19C18.5523 19 19 18.5523 19 18C19 17.4477 18.5523 17 18 17C17.4477 17 17 17.4477 17 18Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M11 18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18C13 17.4477 12.5523 17 12 17C11.4477 17 11 17.4477 11 18Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M5 18C5 18.5523 5.44772 19 6 19C6.55228 19 7 18.5523 7 18C7 17.4477 6.55228 17 6 17C5.44772 17 5 17.4477 5 18Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M17 12C17 12.5523 17.4477 13 18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M5 12C5 12.5523 5.44772 13 6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5C17.4477 5 17 5.44772 17 6Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M11 6C11 6.55228 11.4477 7 12 7C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                        <path d="M5 6C5 6.55228 5.44772 7 6 7C6.55228 7 7 6.55228 7 6C7 5.44772 6.55228 5 6 5C5.44772 5 5 5.44772 5 6Z"
+                                              stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                              stroke-linejoin="round"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-bookmark" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                        </svg>
+                    </i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="mt-3 px-2">
+        <div class="feeds ">
+            <div class="feed-list m-0 me-auto vstack"></div>
+        </div>
+    </div>
+</div>
+{% endif %}

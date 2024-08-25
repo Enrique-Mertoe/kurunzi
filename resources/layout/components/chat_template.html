@@ -1,0 +1,501 @@
+{% if config['d']=='header' %}
+
+<div class="chat-header">
+    <div class="row  align-items-center">
+
+        <!-- Mobile: close -->
+        <div class="col-auto p-x-2 d-lg-none">
+            <a data-hs-toggle="chat"
+               class="icon icon-lg hs-btn hs-btn-md p-4 rounded-circle text-primary" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="feather feather-chevron-left">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </a>
+        </div>
+        <!-- Mobile: close -->
+
+        <!-- Content -->
+        <div class="col-auto">
+            <div class="col-auto">
+                <div class="card btn hs-shadow-1 m-1 card-body p-1 pointer bg-soft-secondary-hover">
+                    <div class="row m-0 align-items-center gx-5">
+                        <div class="col-auto">
+                            <div data-hs-toggle="timeline"
+                                 class="avatar avatar-online d-none d-sm-inline-block">
+                                <img class="avatar-img" src="/static/images/06.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col overflow-hidden">
+                            <div class="vstack align-items-start">
+                                <h5 class="text-truncate">Ollie Chandler</h5>
+                                <span class="h-state">
+                                                <p class="text-truncate d-none text-primary">
+                                                    is typing<span
+                                                        class='typing-dots'><span></span><span></span><span></span></span>
+                                                </p>
+                                                <span class="text-info small">Today 12:45 am</span>
+                                            </span>
+                            </div>
+                        </div>
+                        <div class="col-auto p-0">
+                            <small class="text-muted px-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                                     fill="currentColor" class="bi bi-triangle-fill rotate-90"
+                                     viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M7.022 1.566a1.13 1.13 0 0 1 1.96 0l6.857 11.667c.457.778-.092 1.767-.98 1.767H1.144c-.889 0-1.437-.99-.98-1.767L7.022 1.566z"/>
+                                </svg>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Content -->
+        <div class="col-auto ms-auto gap-3 hstack text-end">
+            <a data-bs-toggle="modal" href="#modal-call"
+               class="eye-icon  eye-btn p-3 r-circle eye-primary-soft text-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                </svg>
+            </a>
+            <a href="#"
+               class="eye-btn eye-icon eye-primary-soft p-3 text-primary r-circle "
+               aria-controls="offcanvas-more">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-camera-video-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"/>
+                </svg>
+            </a>
+            <div class="dropdown">
+                <a data-bs-toggle="dropdown" href="#" class="eye-btn eye-primary-soft p-3 eye-icon text-primary r-circle"
+                   aria-controls="offcanvas-more">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                    </svg>
+                </a>
+                <ul class="dropdown-menu _chat-more text-dark bg-mode hs-shadow-1 mt-3 hs-dropdown_menu dropdown-menu-end"
+                    data-popper-placement="top-end">
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                                    <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                                </svg>
+                            </div>
+                            <span class="me-auto">Achive</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                     class="feather feather-edit-3">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <span class="me-auto">Media</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                </svg>
+                            </div>
+                            <span class="me-auto">Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                     class="feather feather-edit-3">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <span class="me-auto">Clear chat</span>
+                        </a>
+                    </li>
+                    <hr class="bg-secondary">
+                    <li>
+                        <a class="dropdown-item text-danger d-flex align-items-center" href="#">
+
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-slash-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                    <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z"/>
+                                </svg>
+                            </div>
+                            <span class="me-auto">Block</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item text-danger d-flex align-items-center" href="#">
+
+                            <div class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-exclamation-diamond"
+                                     viewBox="0 0 16 16">
+                                    <path d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.482 1.482 0 0 1 0-2.098L6.95.435zm1.4.7a.495.495 0 0 0-.7 0L1.134 7.65a.495.495 0 0 0 0 .7l6.516 6.516a.495.495 0 0 0 .7 0l6.516-6.516a.495.495 0 0 0 0-.7L8.35 1.134z"/>
+                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+                                </svg>
+                            </div>
+                            <span class="me-auto">Report</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <a href="#" data-chat-dismiss class="eye-btn  p-1 eye-icon bg-primary-soft-hover r-circle text-dark"
+               aria-controls="offcanvas-more">
+                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-x"
+                     viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Mobile: more -->
+        <div class="col-2 d-sm-none text-end">
+            <a href="#" class="icon icon-lg text-muted" data-bs-toggle="offcanvas"
+               data-bs-target="#offcanvas-more" aria-controls="offcanvas-more">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                     stroke-linejoin="round" class="feather feather-more-vertical">
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="12" cy="5" r="1"></circle>
+                    <circle cx="12" cy="19" r="1"></circle>
+                </svg>
+            </a>
+        </div>
+        <!-- Mobile: more -->
+
+    </div>
+</div>
+
+{%elif config['d'] == 'body' %}
+<div class="chat-body p-0 h-100 ">
+    <div class="hide-scrollbar bg-dotted chat_scroll chat_inner m-0 flex-1 align-items-end d-flex flex-column-reverse">
+        <div>
+            <svg height="0" width="0">
+                <defs>
+                    <clipPath id="left-droplet">
+                        <path d="M 10,0 A 10,10 0 0 1 0,10 H 16 V 0 Z">
+                    </clipPath>
+                    <clipPath id="right-droplet">
+                        <path d="M 6,0 A 10,10 0 0 0 16,10 H 0 V 0 Z">
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <div class="messages px-5 mx-auto"></div>
+
+        <div class="mx-auto px-4 mb-2 border-1">
+            <div class="hstack">
+                <div style="min-width: 400px;" class="mx-auto card-body">
+                    <div class="vstack align-items-center">
+                                            <span class="avatar avatar-xl">
+                                                <span class="avatar-text">
+                                                    T
+                                                </span>
+                                            </span>
+                        <span class="mt-3">+254 76899999999</span>
+                        <span class="mt-1">~description</span>
+                        <div class="hstack mt-3 gap-3 w-100 justify-content-around">
+                                                <span class="btn w-100 rounded-pill btn-outline-danger py-2 px-7">
+                                                    Block
+                                                </span>
+                            <span class="btn px-7 w-100 rounded-pill btn-outline-primary py-2">
+                                                    Add
+                                                </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="w-100 py-4 m-0 px-4 ">
+            <span style="max-width: 450px;"
+                  class="btn-soft-warning  mx-auto hs-shadow-1 p-3 position-relative card border-0 text-dark w-300px rounded-1">
+                <p>Messages are end-to-end Encrypted. You are guaranteed no one outside this chat can see your messages. <a
+                        class="small fw-bold text-info" href=""><i>Learn more</i></a>
+                </p>
+            </span>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>
+{%elif config['d'] == 'footer' %}
+<div class="chat-footer vstack p-0 position-absolute bottom-0 end-0 row start-0">
+    <!-- Chat: Form -->
+    <form class="chat-form bg-mode p-0 flushs-top hs-shadow-1 rounded-3 " data-emoji-form="">
+        <div class="hs-dz-prev"></div>
+        <div class="hs-editor d-none text-dark">
+            <div class="h-300px  hs-shadow-1 card  card-body bg-light rounded-2 border-0  mb-3 p-1">
+                <div class="vstack">
+                    <div class="hstack gap-4 p-3 border-bottom justify-content-around border-secondary">
+                        <div>
+                                                    <span class="bxtn hover-primary hs-btn-icon rounded-1 pointer hs-btn hs-shadow-1-hover">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                             stroke-width="2" stroke-linecap="round"
+                                                             stroke-linejoin="round" class="feather feather-plus"><line
+                                                                x1="12" y1="5" x2="12" y2="19"></line><line x1="5"
+                                                                                                            y1="12"
+                                                                                                            x2="19"
+                                                                                                            y2="12"></line></svg>
+                                                    </span>
+                        </div>
+                        <div>
+                                                    <span class="btn hover-primary hs-btn-icon rounded-1 hs-btn hs-shadow-1-hover">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-palette-fill"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07M8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                        </svg>
+                                                    </span>
+                        </div>
+                        <div>
+                                                    <span data-editor-toggle-aside="#f90"
+                                                          class="btn hover-primary hs-btn-icon rounded-1 hs-btn hs-shadow-1-hover">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-pen-fill"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001"/>
+                                                        </svg>
+                                                    </span>
+                        </div>
+                        <div>
+                                                    <span class="btn hover-primary hs-btn-icon rounded-1 hs-btn hs-shadow-1-hover">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-palette-fill"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07M8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                        </svg>
+                                                    </span>
+                        </div>
+                        <div>
+                                                    <span class="btn hover-primary hs-btn-icon rounded-1 hs-btn hs-shadow-1-hover">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                             fill="currentColor" class="bi bi-palette-fill"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M12.433 10.07C14.133 10.585 16 11.15 16 8a8 8 0 1 0-8 8c1.996 0 1.826-1.504 1.649-3.08-.124-1.101-.252-2.237.351-2.92.465-.527 1.42-.237 2.433.07M8 5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m4.5 3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                                        </svg>
+                                                    </span>
+                        </div>
+                        <div class="ms-auto">
+                                                    <span data-hs-dismiss="editor"
+                                                          class="btn btn-close hover-primary hs-btn-icon hs-btn hs-shadow-1-hover">
+
+                                                    </span>
+                        </div>
+                    </div>
+                    <div class="position-relative overflow-hidden d-flex h-100">
+                        <div class="h-100">
+                                                    <span>
+                                                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente repudiandae aliquid praesentium repellendus quo iste esse aliquam asperiores dolores. Possimus ullam id sequi tempora vitae in quod similique obcaecati reprehenderit.</p>
+                                                    </span>
+                        </div>
+                        <div id="f90"
+                             class="offcanvas-editor border-start border-dark shosw  offcanvas-end">
+                            <div class="offcanvas-header m-0 row p-0 py-2">
+                                <div class="hstack">
+                                    <div class="ms-auto">
+                                                                <span data-editor-toggle-aside="#f90"
+                                                                      class="hs-btn hover-primary rounded-circle p-3 btn btn-close">
+
+                                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="offcanvas-body p-0 hide-scrollbar ">
+                                <div class="vstack">
+                                    <ul class="list-group p-0 list-group-flush">
+                                        {%for i in range(0,5)%}
+                                        <li class="list-group-item">
+                                            <div class="vstack px-3 bg-soft-secondary-hover">
+                                                <b>{{loop.cycle("Brightness","saturation","Blur","Gray
+                                                    Scale")}}</b>
+                                                <div class="hstack gap-2">
+                                                                        <span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                 width="16" height="16"
+                                                                                 fill="currentColor"
+                                                                                 class="bi bi-globe-americas"
+                                                                                 viewBox="0 0 16 16">
+                                                                                <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M2.04 4.326c.325 1.329 2.532 2.54 3.717 3.19.48.263.793.434.743.484-.08.08-.162.158-.242.234-.416.396-.787.749-.758 1.266.035.634.618.824 1.214 1.017.577.188 1.168.38 1.286.983.082.417-.075.988-.22 1.52-.215.782-.406 1.48.22 1.48 1.5-.5 3.798-3.186 4-5 .138-1.243-2-2-3.5-2.5-.478-.16-.755.081-.99.284-.172.15-.322.279-.51.216-.445-.148-2.5-2-1.5-2.5.78-.39.952-.171 1.227.182.078.099.163.208.273.318.609.304.662-.132.723-.633.039-.322.081-.671.277-.867.434-.434 1.265-.791 2.028-1.12.712-.306 1.365-.587 1.579-.88A7 7 0 1 1 2.04 4.327Z"/>
+                                                                            </svg>
+                                                                        </span>
+                                                    <input class="form-range" type="range">
+                                                </div>
+                                            </div>
+                                        </li>
+                                        {%endfor%}
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="hstack w-100 m-0">
+
+            <div class="col  p-0">
+                <div class=" d-none selection">
+                    <div class="selection-inner">
+                        <div class="selection-content rounded hs-shadow-1">
+                            <div>
+
+                            </div>
+                            <div class="hstack p-3">
+                                <button title="Bold" type="button"
+                                        class="btn hs-btn text-black hs-btn-icon bg-soft-secondary-hover rounded-circle p-3">
+                                    <span class="fw-bold">B</span></button>
+                                <button title="Italic" type="button"
+                                        class="btn hs-btn text-black hs-btn-icon bg-soft-secondary-hover rounded-circle p-3">
+                                    <i class="fw-bold">I</i></button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="input-group ps-7">
+                    <div data-auto-adjust data-max="150"
+                         class="form-control hs-scrollbar-1-hover hs-input px-0"
+                         style="background: inherit;" placeholder="Type your message..." rows="1"
+                         data-emoji-input="" data-autosize="true"></div>
+
+                </div>
+            </div>
+
+            <div class="col-auto mt-auto p-0">
+                <div class="hstack gap-2 pe-3 py-2">
+                    <a href="#" data-emoji-btn="">
+                                        <span class="eye-btn eye-icon rounded-circle ">
+                                            <svg viewBox="0 0 24 24" height="24" width="24" preserveAspectRatio="xMidYMid meet" class="" version="1.1" x="0px" y="0px" enable-background="new 0 0 24 24"><title>smiley</title><path fill="currentColor" d="M9.153,11.603c0.795,0,1.439-0.879,1.439-1.962S9.948,7.679,9.153,7.679 S7.714,8.558,7.714,9.641S8.358,11.603,9.153,11.603z M5.949,12.965c-0.026-0.307-0.131,5.218,6.063,5.551 c6.066-0.25,6.066-5.551,6.066-5.551C12,14.381,5.949,12.965,5.949,12.965z M17.312,14.073c0,0-0.669,1.959-5.051,1.959 c-3.505,0-5.388-1.164-5.607-1.959C6.654,14.073,12.566,15.128,17.312,14.073z M11.804,1.011c-6.195,0-10.826,5.022-10.826,11.217 s4.826,10.761,11.021,10.761S23.02,18.423,23.02,12.228C23.021,6.033,17.999,1.011,11.804,1.011z M12,21.354 c-5.273,0-9.381-3.886-9.381-9.159s3.942-9.548,9.215-9.548s9.548,4.275,9.548,9.548C21.381,17.467,17.273,21.354,12,21.354z  M15.108,11.603c0.795,0,1.439-0.879,1.439-1.962s-0.644-1.962-1.439-1.962s-1.439,0.879-1.439,1.962S14.313,11.603,15.108,11.603z"></path></svg>
+                                        </span>
+                    </a>
+                    <div class="dropdown">
+                        <a data-bs-toggle="dropdown" href="#" class="">
+
+                                                <span class="eye-btn eye-icon rounded-circle text-primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                         class="feather feather-plus"><line x1="12" y1="5" x2="12"
+                                                                                            y2="19"></line><line x1="5"
+                                                                                                                 y1="12"
+                                                                                                                 x2="19"
+                                                                                                                 y2="12"></line></svg>
+                                                 </span>
+                        </a>
+                        <ul class="dropdown-menu hs-dropdown_menu bg-mode hs-shadow-1 dropdown-menu-end mb-6"
+                            style="">
+
+                            <li>
+
+                                <a data-input-docs
+                                   class="dropdown-item text-dark fw-bold d-flex align-items-center"
+                                   href="#">
+
+                                    <div class="icon me-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             fill="currentColor" class="bi bi-card-list"
+                                             viewBox="0 0 16 16">
+                                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                                            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8m0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0M4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0m0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0"/>
+                                        </svg>
+                                    </div>
+                                    <span class="me-auto">Documents</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item text-dark fw-bold d-flex align-items-center"
+                                   href="#">
+
+                                    <div class="icon bg-info text-info">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                             stroke-width="2" stroke-linecap="round"
+                                             stroke-linejoin="round"
+                                             class="feather feather-corner-up-left">
+                                            <polyline points="9 14 4 9 9 4"></polyline>
+                                            <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                                        </svg>
+                                    </div>
+                                    <span class="me-auto">Images/Videos</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-switcher hs-shadow-1 p-7 btn btn-circle ms-1">
+                        <div class="active btn-switcher-item default">
+                            <button class="eye-btn btn eye-icon chat-send-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                     fill="currentColor" class="bi bi-mic-fill" viewBox="0 0 16 16">
+                                    <path d="M5 3a3 3 0 0 1 6 0v5a3 3 0 0 1-6 0z"/>
+                                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="btn-switcher-item">
+                            <button type="submit" class="eye-btn btn eye-icon chat-send-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier"
+                                       stroke-width="0"></g>
+                                    <g
+                                            id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                            stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path
+                                                d="M13.2328 16.4569C12.9328 16.7426 12.9212 17.2173 13.2069 17.5172C13.4926 17.8172 13.9673 17.8288 14.2672 17.5431L13.2328 16.4569ZM19.5172 12.5431C19.8172 12.2574 19.8288 11.7827 19.5431 11.4828C19.2574 11.1828 18.7827 11.1712 18.4828 11.4569L19.5172 12.5431ZM18.4828 12.5431C18.7827 12.8288 19.2574 12.8172 19.5431 12.5172C19.8288 12.2173 19.8172 11.7426 19.5172 11.4569L18.4828 12.5431ZM14.2672 6.4569C13.9673 6.17123 13.4926 6.18281 13.2069 6.48276C12.9212 6.78271 12.9328 7.25744 13.2328 7.5431L14.2672 6.4569ZM19 12.75C19.4142 12.75 19.75 12.4142 19.75 12C19.75 11.5858 19.4142 11.25 19 11.25V12.75ZM5 11.25C4.58579 11.25 4.25 11.5858 4.25 12C4.25 12.4142 4.58579 12.75 5 12.75V11.25ZM14.2672 17.5431L19.5172 12.5431L18.4828 11.4569L13.2328 16.4569L14.2672 17.5431ZM19.5172 11.4569L14.2672 6.4569L13.2328 7.5431L18.4828 12.5431L19.5172 11.4569ZM19 11.25L5 11.25V12.75L19 12.75V11.25Z"
+                                                fill="currentColor"></path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Chat: Form -->
+</div>
+{%endif%}
+

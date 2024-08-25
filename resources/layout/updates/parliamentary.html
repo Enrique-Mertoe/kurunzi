@@ -1,0 +1,62 @@
+<div class="vstack position-relative">
+    <div class="text-success d-none  h-200px position-relative mx-1 overflow-hidden mt-n5">
+        <svg class="w-100 h-100 mt-n8" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729 c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
+                  fill="currentColor" opacity="0.6"></path>
+            <path d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729 c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
+                  fill="currentColor" opacity="0.6"></path>
+            <path d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428 c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
+                  fill="currentColor"></path>
+        </svg>
+    </div>
+    <div class="inset-0">
+        <div class="vstack pt-4  align-items-center">
+            <span class="h2 text-capitalize fw-bold text-muted">
+                {{config.page}} Updates
+            </span>
+            <div class="vstack ">
+                <div class="card border-0 rounded-0 border-bottom vstack">
+                    <ul class="nav px-3 py-1 bg-light nav-tabs nav-bottom-line justify-content-center justify-content-md-start"
+                        role="tablist">
+                        <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab"
+                                                                    href="#tab-1"
+                                                                    aria-selected="true" role="tab">National Assembly</a>
+                        </li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#tab-2"
+                                                                    aria-selected="false" tabindex="-1" role="tab">
+                            Senate
+                        </a></li>
+                    </ul>
+                    </ul>
+                    <div class="my-2 px-2 form-control p-0 border-0 rounded-0 shadow-none hstack">
+                            <span class="pointer fw-bold">Search:
+                            </span>
+                        <input type="text"
+                               class="form-control border-0 bg-transparent shadow-none hs-shadow-2 "
+                               placeholder="search...">
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-1">
+                        <div class="vstack">
+                            <div class="px-2">
+
+                                {%include "updates/component.html" %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade show" id="tab-2">
+                        <div class="vstack">
+                            <div class="px-2">
+                                {%include "updates/component.html" %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

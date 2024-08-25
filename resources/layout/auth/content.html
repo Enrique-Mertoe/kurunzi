@@ -1,0 +1,191 @@
+<div class="auth-layout">
+    <div class="auth-bg"></div>
+    <div class="vstack auth-layout-content align-items-center  position-relative">
+        <div class="flex-grow-1 w-100">
+            <div class="hstack mt-4 justify-content-center">
+                {%include "auth/header.html"%}
+            </div>
+            <div class="col-md-6  px-2 mx-auto">
+                <div class="v-fade  ">
+                    <div class="v-fade-item active " id="page-su">
+                        <div class="vstack   mx-auto">
+                            <h4 class="mt-4 mx-auto mb-3">Create account</h4>
+                            <form data-action="auth?tag=register" data-action-tag="register" class="form-groupy col">
+                                <div class="smv-groupy card col-12 p-lg-4 rounded-3 hs-shadow-1 border-0">
+                                    <div class="smv-groupy-item">
+                                        {%include "auth/register.html" %}
+                                        <div class="smv-groupy-footer">
+                                            <div class="col-12 mt-3">
+                                                <div class="smv-form-errors">
+                                                    <i>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                                                             fill="currentColor" class="bi bi-exclamation-circle-fill"
+                                                             viewBox="0 0 16 16">
+                                                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4m.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
+                                                        </svg>
+                                                    </i>
+                                                    <span></span>
+                                                </div>
+                                                <div class="hstack gap-2 justify-content-end col">
+                                                    <div class="form-loader">
+                                                        <div class="border-spinner"></div>
+                                                    </div>
+                                                    <button data-finish-text="create account" type="submit"
+                                                            class="text-capitalize col-md-4 col py-2 btn btn-success">
+                                                        next
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <span>Already have account? <a data-bs-toggle="vFade"
+                                                                   href="#page-login">Login here</a></span>
+                                </div>
+                            </form>
+                            <div class="row d-none">
+                                <div class="col">
+                                    <form autocomplete="off" data-tag="register" class="vstack form-signup gap-2">
+                                        <div class="hstack gap-2">
+                                            <div class="form-floating col">
+                                                <input name="f-name" id="#fname" class="form-control" type="text"
+                                                       placeholder="First name">
+                                                <label for="#fname">First name</label>
+                                            </div>
+                                            <div class="form-floating col">
+                                                <input name="l-name" id="#lname" class="form-control" type="text"
+                                                       placeholder="Last name">
+                                                <label for="#lname">Last name</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input autocomplete="new-password" name="u-email" id="#emailad"
+                                                   class="form-control" type="email" placeholder="Email">
+                                            <label for="#emailad">Email</label>
+                                        </div>
+                                        <div class="">
+                                            <span>Gender</span>
+
+                                            <div class="hstack mt-2 gap-4">
+                                                <label>
+                                                    Male
+                                                    <input value="male" type="radio" name="u-gender">
+                                                </label>
+                                                <label>
+                                                    Female
+                                                    <input value="female" type="radio" name="u-gender">
+                                                </label>
+                                                <label>
+                                                    Other
+                                                    <input value="other" type="radio" name="u-gender">
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <span class="mt-3 h4">Location</span>
+                                        <div class="form-floating">
+                                            <input value="Nairobi" name="u-county" id="#r-county" class="form-control"
+                                                   type="text" placeholder="County">
+                                            <label for="#r-county">County</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input value="Kibra Sub County" name="u-s-county" id="#r-s-county"
+                                                   class="form-control" type="text" placeholder="Constituency">
+                                            <label for="#r-s-county">Constituency</label>
+                                        </div>
+                                        <span class="mt-3 h4">Security</span>
+                                        <div class="form-floating">
+                                            <input name="u-password" id="#r-password" class="form-control"
+                                                   type="password"
+                                                   placeholder="Password">
+                                            <label for="#r-password">Password</label>
+                                        </div>
+                                        <div class="form-floating">
+                                            <input id="#r-c-password" class="form-control" type="password"
+                                                   placeholder="Confirm Password">
+                                            <label for="#r-c-password">Confirm Password</label>
+                                        </div>
+                                        <span class="text-center form-message"></span>
+                                        <div class="ms-auto hstack gap-3">
+                                            <div class="form-loader">
+                                                <div class="border-spinner"></div>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Create account</button>
+                                        </div>
+
+                                        <div class="mt">
+                                            <span>Already have account? <a data-bs-toggle="vFade" href="#page-login">Login here</a></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="v-fade-item  " id="page-login">
+                        <div class="vstack mx-auto align-items-center">
+
+                            <div class="hstack justify-content-between align-items-center gap-3 mb-4">
+                            <span data-bs-toggle="vFade" data-bs-target="#page-su" class="btn rounded-circle p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                     class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                                  <path fill-rule="evenodd"
+                                        d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
+                                </svg>
+                            </span>
+                                <span class="fw-bold fs-4 text-primary">Welcome back</span>
+                                <span></span>
+                            </div>
+                           <div class="card border-0 p-2 w-100 hs-shadow-1">
+                                <form data-tag="login" class="vstack form-login gap-2">
+                                <div class="form-floating">
+                                    <input name="u-email" id="#l-email" class="form-control" type="text"
+                                           placeholder="Email">
+                                    <label for="#l-email">Email or UserName</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input name="u-password" id="#l-password" class="form-control" type="password"
+                                           placeholder="Password">
+                                    <label for="#l-password">Password</label>
+                                </div>
+                                <span class="text-center form-message"></span>
+                                <div class="mt-2">
+                                    <span>Forgot password?</span>
+                                </div>
+
+                                <div class="ms-auto hstack gap-3">
+
+                                    <div class="form-loader">
+                                        <div class="border-spinner"></div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Login</button>
+                                </div>
+
+
+                            </form>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="mt-5 w-100 bg-secondary">
+                <div class="hstack">
+                    <ul class="nav smaller  mb-4 mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold ps-0 pe-2 text-light" href="/terms">Terms of use</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link text-light fw-bold px-2" href="#">Privacy</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-bold px-2" href="#">Cookies</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-bold px-2" href="#">Help</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-bold px-2" href="#">Developers</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-bold px-2" href="#">About</a></li>
+                        <li class="nav-item"><a class="nav-link text-light fw-bold px-2" href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+    </div>
+
+</div>

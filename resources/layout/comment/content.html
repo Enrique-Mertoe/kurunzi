@@ -1,0 +1,62 @@
+{% set comments  = data.comments %}
+<div class="vstack comment-list">
+    {%if comments %}
+    {%for comment in comments %}
+        {%set user = comment.user %}
+    <div class="comment-item">
+        <div class="comment-inner">
+            <div class="comment-content">
+                <div class="comment-body">
+                    <div class="hstack gap-2  align-items-start">
+                        <div class="avatar avatar-sm">
+                            <img class="avatar-img" src="{{user.profile_pic| file_image}}" alt="{{user.username}}">
+                        </div>
+                        <div class="col">
+                            <div class="hstack position-relative align-items-end gap-2">
+                                <span class="fw-bold">{{user.fullname}}</span> <span class="text-muted smaller">3hrs ago</span>
+
+                                <div class="position-absolute top-0 end-0">
+                                    <div class="btn p-1 rounded-circle ">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <span>
+                                <p>{{comment.status}}</p>
+                            </span>
+                            <div class="mt-1 border-top border-bottom py-1">
+                                <div class="hstack gap-3">
+                                    <span class="smaller btn py-1 text-secondary">
+                                        <i class="mx-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-thumbs-up"><path
+                                                    d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                                        </i>
+                                        like</span>
+                                    <span class="smaller btn py-1 text-secondary">
+                                        <i class="mx-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-message-circle"><path
+                                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                        </i>
+                                        reply</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    {%endif%}
+</div>

@@ -1,0 +1,161 @@
+{%set logo = 'logo.svg' %}
+{%set usermanager = current_user.uid | usermanager %}
+<div class="main-sidebar ">
+    <div class="sidebar">
+        <div class="sidebar-content vstack">
+            <div class="sidebar-top border-bottom">
+                <div class="hstack ps-3 align-items-center">
+                    {% include "utils/logo.html"%}
+                    <span class="fs-4 logo-text fw-bold smart-logo hstack  gap-0 pointer ps-3">
+                        <span class="text-danger">KE</span>
+                        <span class="text-success">YE</span>
+                    </span>
+                </div>
+            </div>
+            <div class="sidebar-menu mt-3">
+                <ul class="nav nav-ls">
+                    <li class="nav-item">
+                        <a href="#!" data-url="{{url_for('main.updates')}}" class="nav-link">
+                            <i class="me-2">
+                                <svg fill="#000000" width="24" height="24" viewBox="0 0 1000 1000"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M893 422L566 93q-27-28-66-28t-66 28L107 422q-27 27-27 66t27 66l248 249q4 4 9 5t10-1 8-6.5 3-10.5V661q0-8-5-13L247 512q-10-10-10-24t10-24l229-231q10-10 24-10t24 10l229 231q10 10 10 24t-10 24L651 614q-5 6-12.5 6t-12.5-6L518 506q-5-5-11.5-2.5T500 513v411q0 7 6.5 9.5T518 931l375-377q27-27 27-66t-27-66z"></path>
+                                    </g>
+                                </svg>
+                            </i>
+                            <span class="navbar-text">GOK updates</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#!" data-url="{{url_for('main.corruption')}}" class="nav-link">
+                            <i class="me-2">
+                                <svg width="24" height="24" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                                     class="iconify iconify--emojione-monotone" preserveAspectRatio="xMidYMid meet"
+                                     fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path d="M61.971 42.634c-.632-6.334-2.045-11.643-2.358-25.352c-.223-9.706-12.006-10.453-15.069-7.164c-3.471-4.255-12.762-4.354-16.229.94c-2.693-1.48-9.901-1.799-12.879 1.873c0 0-8.835-1.411-12.836 13.321c-1.437 5.289.12 12.302.41 13.756c2.023 10.147 10.502 8.19 12.209 7.2c2.892 7.44 10.375 6.101 13.385 3.913c.174 4.414 3.771 6.535 6.065 5.699c6.722-2.451 12.33-2.783 16.764-2.607c2.127.083 3.797-.938 4.741-2.779c3.325-1.733 6.148-5.279 5.797-8.8m-15.525.998c1.008-5.798-1.179-14.392-.4-20.936c-3.16 4.926-.82 18.871-2.146 24.525c-1.085 4.62-9.646 3.175-12.294-2.375c-.918-8.487.424-13.407-1.889-22.15c.218 10.57-1.415 12.539-.325 22.813c-2.524 2.592-11.239.768-11.679-3.621c-.587-5.858.628-10.459-1.099-16.139c0 5.369-1.062 8.233-.541 16.18c.003.049-1.556 1.24-3.869 1.24c-9.471 0-8.646-14.027-7.087-18.926c2.256-7.098 8.207-11.233 11.281-9.611c1.527-3.561 10.239-3.875 11.74-.539c1.296-6.143 13.705-5.645 17.005-.166c2.214-4.44 12.358-3.112 12.464 3.388c.235 14.059 2.284 20.641 2.203 26.796c-3.471 4.281-9.605 3.902-13.364-.479"
+                                              fill="currentColor"></path>
+                                    </g>
+                                </svg>
+                            </i>
+                            <span class="navbar-text">AngukaNayo</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a data-url="{{url_for('main.empty',tr = 'Events')}}" href="#!" class="nav-link">
+                            <i class="me-2">
+                                <svg width="24" height="24" viewBox="0 0 48 48" data-name="Layer 1" id="Layer_1"
+                                     xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <defs>
+                                            <style>.cls-1 {
+                                                fill: #55aae1;
+                                            }
+
+                                            .cls-2 {
+                                                opacity: 0.35;
+                                            }</style>
+                                        </defs>
+                                        <title></title>
+                                        <path class="cls-1"
+                                              d="M42.33,38H5.67l-.25-.63a20,20,0,1,1,37.16,0ZM7,36H41A18,18,0,1,0,6,30,17.87,17.87,0,0,0,7,36Z"></path>
+                                        <path class="cls-1"
+                                              d="M39,31a1,1,0,0,1-1-1,14,14,0,0,0-26.83-5.6A13.78,13.78,0,0,0,10,30a1,1,0,0,1-2,0,15.8,15.8,0,0,1,1.34-6.4A16,16,0,0,1,40,30,1,1,0,0,1,39,31Z"></path>
+                                        <path class="cls-1"
+                                              d="M28,38a1,1,0,0,1-1-1,3,3,0,0,0-6,0,1,1,0,0,1-2,0,5,5,0,0,1,10,0A1,1,0,0,1,28,38Z"></path>
+                                        <path class="cls-1"
+                                              d="M26.8,34a1,1,0,0,1-.62-.22,1,1,0,0,1-.16-1.4l6.4-8A1,1,0,1,1,34,25.63l-6.4,8A1,1,0,0,1,26.8,34Z"></path>
+                                        <g class="cls-2">
+                                            <path class="cls-1"
+                                                  d="M35.84,15.16a18.89,18.89,0,0,1,3.31,17.43A2,2,0,0,1,37.23,34H5.45a18.89,18.89,0,0,0,.9,3h35.3a18.92,18.92,0,0,0-5.81-21.84Z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </i>
+                            <span class="navbar-text">Events</span></a>
+                    </li>
+
+                </ul>
+
+
+            </div>
+            <div class="py-1">
+                <div class="px-2">
+                    <div class="btn studio-btn btn-outline-dark align-items-center justify-content-center rounded-pill hstack gap-2">
+                        <i class="">
+                            <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path opacity="0.4" d="M6 12H18" stroke="green" stroke-width="1.5"
+                                          stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M12 18V6" stroke="red" stroke-width="1.5" stroke-linecap="round"
+                                          stroke-linejoin="round"></path>
+                                </g>
+                            </svg>
+                        </i>
+                        <div class="fw-bold small-hide">Create</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <div class="card rounded-1 p-2 hs-shadow-1">
+                    <div class="vstack gap-2">
+                        <div>
+                            <div class="hstack small-vertical border-bottom py-2 gap-1 align-items-center">
+                                <div class="avatar avatar-sm">
+                                    <img class="avatar-img" src="{{current_user.profile_pic|file_image}}" alt="">
+                                </div>
+                                <span class="small small-hide">
+                                    @{{data.user.username}}
+                                </span>
+
+                                <span class="text-success smaller ms-auto">online</span>
+                            </div>
+                            <div class="hstack small-vertical w-100 bg-in justify-content-between">
+                                    <span class="text-center col">
+                                        <span class="fw-bold">{{usermanager.followers}}</span><br>
+                                        <span class="small-hide">
+                                            Followers
+                                        </span>
+                                    </span>
+                                <div class="vr"></div>
+                                <span class="text-center col">
+                                    <span class="fw-bold">{{usermanager.following}}</span><br>
+                                    <span class="small-hide">
+                                        Following
+                                    </span>
+                                </span>
+                            </div>
+
+
+                        </div>
+                        <a data-url="{{url_for('main.settings', st='account')}}"
+                           href="{{url_for('main.settings', st='account')}}"
+                           class="btn btn-outline-success account-btn">
+                            <i>
+                                <svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier"><title>Account Settings</title>
+                                        <path d="M9.6,3.32a3.86,3.86,0,1,0,3.86,3.85A3.85,3.85,0,0,0,9.6,3.32M16.35,11a.26.26,0,0,0-.25.21l-.18,1.27a4.63,4.63,0,0,0-.82.45l-1.2-.48a.3.3,0,0,0-.3.13l-1,1.66a.24.24,0,0,0,.06.31l1,.79a3.94,3.94,0,0,0,0,1l-1,.79a.23.23,0,0,0-.06.3l1,1.67c.06.13.19.13.3.13l1.2-.49a3.85,3.85,0,0,0,.82.46l.18,1.27a.24.24,0,0,0,.25.2h1.93a.24.24,0,0,0,.23-.2l.18-1.27a5,5,0,0,0,.81-.46l1.19.49c.12,0,.25,0,.32-.13l1-1.67a.23.23,0,0,0-.06-.3l-1-.79a4,4,0,0,0,0-.49,2.67,2.67,0,0,0,0-.48l1-.79a.25.25,0,0,0,.06-.31l-1-1.66c-.06-.13-.19-.13-.31-.13L19.5,13a4.07,4.07,0,0,0-.82-.45l-.18-1.27a.23.23,0,0,0-.22-.21H16.46M9.71,13C5.45,13,2,14.7,2,16.83v1.92h9.33a6.65,6.65,0,0,1,0-5.69A13.56,13.56,0,0,0,9.71,13m7.6,1.43a1.45,1.45,0,1,1,0,2.89,1.45,1.45,0,0,1,0-2.89Z"></path>
+                                    </g>
+                                </svg>
+                            </i>
+                            <span class="small-hide me-auto">Account</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

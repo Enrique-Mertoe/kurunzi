@@ -1,0 +1,10 @@
+{%set cmt = data.comment %}
+<div class="comment-item gap-1 hstack">
+    <div class="avatar avatar-xs">
+        <img src="{{cmt.user.profile_pic | file_image}}" alt="" class="avatar-img">
+    </div>
+    <span class="fw-bold text-capitalize">{{cmt.user.fullname}}</span>
+    <span>{{cmt.status}}</span>
+<!--    <span class="text-muted">(789 replies)</span>-->
+</div>
+

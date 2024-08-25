@@ -1,0 +1,6 @@
+{%if data.config%}
+{%set config = data.config%}
+{%include "updates/" + config.page + ".html" %}
+{%else%}
+{%include "updates/component.html"%}
+{%endif%}

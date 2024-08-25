@@ -1,0 +1,115 @@
+<div class="vstack">
+    <div class="hstack gap-3 align-items-center">
+        <div class="pg-manager-logo">
+            <img class="img-fluid" src="/static/images/rpk.jpg" alt="">
+        </div>
+        <div>
+            <h2 class="fw-bold">{{current_user.fullname}}</h2>
+        </div>
+
+        <div class="ms-3">
+            <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
+                <!-- Group stat item -->
+                <div>
+                    <h6 class="mb-0 fw-bold">32k</h6>
+                    <small>Followers</small>
+                </div>
+                <!-- Divider -->
+                <div class="vr"></div>
+                <!-- Group stat item -->
+                <div>
+                    <h6 class="mb-0 fw-bold">20</h6>
+                    <small>Post</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card bg-transparent border-0 flex-grow-1">
+        <!-- Card header START -->
+        <div class="card-header bg-light border-0 pb-0">
+            <div class="row g-2">
+                <div class="col-sm-6 col-lg-3">
+                    <!-- Button modal -->
+                    <a class="btn btn-success-soft ms-auto w-100" href="#" data-bs-toggle="modal"
+                       data-bs-target="#modalCreateGroup">
+                        <i class="bi-plus pe-1"></i> Create new department</a>
+                </div>
+            </div>
+        </div>
+        <!-- Card header START -->
+        <!-- Card body START -->
+        <div class="card-body p-0">
+            <!-- Tab nav line -->
+            <ul class="nav px-3 py-1 bg-light nav-tabs nav-bottom-line justify-content-center justify-content-md-start"
+                role="tablist">
+                <li class="nav-item" role="presentation"><a class="nav-link active" data-bs-toggle="tab" href="#tab-2"
+                                                            aria-selected="true" role="tab">Posts</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" data-bs-toggle="tab" href="#tab-1"
+                                                            aria-selected="false" tabindex="-1" role="tab"> Sub
+                    sections</a></li>
+            </ul>
+            <div class="tab-content mt-3 mb-0 pb-0">
+
+                <!-- Friends groups tab START -->
+                <div class="tab-pane" id="tab-1" role="tabpanel">
+                    <div class="row g-4">
+                        <div class="col-sm-6 col-lg-4">
+                            <!-- Card START -->
+                            <div class="card">
+                                <div class="h-80px rounded-top"
+                                     style="background-image:url(assets/images/bg/01.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+                                <!-- Card body START -->
+                                <div class="card-body text-center">
+                                    <!-- Avatar -->
+                                    <div class="">
+                                        <a href="#" class="avatar avatar-lg">
+                                            <img class="avatar-img" src="" alt=""></a>
+                                    </div>
+                                    <!-- Info -->
+                                    <h5 class="mb-0"><a href="group-details.html">NHIF</a></h5>
+                                    <!-- Group stat START -->
+                                    <div class="hstack gap-2 gap-xl-3 justify-content-center mt-3">
+                                        <!-- Group stat item -->
+                                        <div>
+                                            <h6 class="mb-0">32k</h6>
+                                            <small>Followers</small>
+                                        </div>
+                                        <!-- Divider -->
+                                        <div class="vr"></div>
+                                        <!-- Group stat item -->
+                                        <div>
+                                            <h6 class="mb-0">20</h6>
+                                            <small>Post</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card body END -->
+                                <!-- Card Footer START -->
+                                <div class="card-footer p-0 text-center">
+                                    <a class="btn col-12 rounded-0 rounded-bottom btn-success-soft" href="#!">Manage
+                                        this account</a>
+                                </div>
+                                <!-- Card Footer END -->
+                            </div>
+                            <!-- Card END -->
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-2" class="tab-pane fade show active">
+                    <div class="row">
+                        <div class="col">
+                            <div class="feeds">
+                                <div class="feed-list"></div>
+
+                            </div>
+                        </div>
+                        <div class="col-6"></div>
+                    </div>
+                </div>
+                <!-- Friends' groups tab END -->
+
+            </div>
+        </div>
+        <!-- Card body END -->
+    </div>
+</div>

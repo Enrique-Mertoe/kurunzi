@@ -1,0 +1,8 @@
+.er-aside{
+    height: 100vh;
+    border-right: .05rem solid rgba(0,0,0,0.1);
+}
+
+.smv-page-option .smv-page-option-item{
+    display: none;
+}

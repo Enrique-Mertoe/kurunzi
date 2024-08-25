@@ -1,0 +1,16 @@
+{%set sug = data.sug %}
+<li class="nav-item follow-suggest-item">
+    <a href="#!" data-url="{{sug.username}}" class="nav-link">
+        <span class="hstack gap-2">
+            <div>
+                <div class="avatar avatar-online avatar-sm">
+                <img src="{{sug.profile_pic | file_image}}" class="avatar-img">
+            </div>
+            </div>
+            <span class="text-capitalize fw-bold text-truncate">{{sug.fullname}}</span>
+            <div class="ms-auto">
+                <span data-fl="{{sug.uid}}" class="btn py-1 smaller rounded-pill text-primary fw-bold">Follow</span>
+            </div>
+        </span>
+    </a>
+</li>

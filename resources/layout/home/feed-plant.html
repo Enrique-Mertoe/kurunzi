@@ -1,0 +1,31 @@
+<div class="feed-plant-content">
+    <div class="feed-creator">
+        <div class="card creator-ignitor border-0 hs-shadow-2 card-body p-1">
+            <div class="creator-body">
+                <div class="hstack  align-items-start gap-1">
+                    <div class="col-auto p-0">
+                        <div class="avatar">
+                            <div class="upload-progress"></div>
+                            <img class="avatar-img" src="{{user.profile_pic|file_image}}" alt="">
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="vstack">
+                            <form class="vstack form-studio">
+                                <span class="creator-desc creator-input-placeholder">Create post
+                                </span>
+                                <div class="creator-desc smart-input creator-input" contenteditable="true"
+                                     data-placeholder="Create post"></div>
+                                <div class="feed-creator-options ">
+                                    {%include "home/feed-plant-begin.html"%}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

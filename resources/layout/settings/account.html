@@ -1,0 +1,51 @@
+<div class="vstack mx-auto col-10">
+    <div class="h5">Account details</div>
+    <div class=" card-body">
+        <form class="vstack gap-2">
+            <div class="hstack border-bottom">
+                <div>
+                    <span class="fw-bold">Full name: </span>
+                </div>
+                <div>
+                    <input value="{{current_user.fullname}}" type="text"
+                           class="form-control py-3 border-0 shadow-none bg-transparent shadow-none">
+
+                </div>
+            </div>
+            <div class="hstack border-bottom">
+                <div>
+                    <span class="fw-bold pe-1">Username:</span>@
+                </div>
+                <div>
+                    <input value="{{current_user.username}}" type="text"
+                           class="form-control py-3 border-0 ps-0 shadow-none bg-transparent shadow-none">
+
+                </div>
+            </div>
+            <div class="hstack border-bottom">
+                <div>
+                    <span class="fw-bold">Email: </span>
+                </div>
+                <div>
+                    <input value="{{current_user.email}}" type="email"
+                           class="form-control py-3 border-0 shadow-none bg-transparent shadow-none">
+
+                </div>
+            </div>
+            <div class="hstack">
+                <div>
+                    <span class="fw-bold">Bio: </span>
+                </div>
+                <div>
+                    <input value="{{current_user.bio or 'No bio'}}" type="text"
+                           class="form-control py-3 border-0 shadow-none bg-transparent shadow-none">
+
+                </div>
+            </div>
+            <div class="ms-auto">
+                <button class="btn btn-success rounded-pill">make changes</button>
+            </div>
+        </form>
+
+    </div>
+</div>
