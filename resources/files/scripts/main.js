@@ -71,6 +71,14 @@
                     <span class="border-spinner"></span>
                 </div>`);
         },
+        prepare1(e, r) {
+            if (r) e.find(".prep-area").remove();
+            else
+                e.append(
+                    `<div class="vstack prep-area justify-content-center align-items-center">
+                    <span class="border-spinner"></span>
+                </div>`);
+        },
         load_pages: () => {
             $.post(
                 window.location.href,
@@ -353,41 +361,75 @@
         return new e.post.init(p);
     }).prototype = e.post.fn = {
         reaction() {
-            let s = this;
+            let s = this, c = this.lb.find("[data-lct]");
             this.lb.on("click", function (e) {
                 e.preventDefault();
                 $(this).toggleClass("active animate")
-                s.s_r('rpl')
+                s.s_r('rpl').then(res => {
+                    if (res.success) {
+                        if (s.lb.hasClass("active")) {
+                            c.html(Number((c.text() || 0) + 1))
+                        } else {
+                            c.html(Number((c.text() || 0)-1) || "")
+                        }
+                    }
+                })
             });
             this.nc.on("click", function (ev) {
                 ev.preventDefault();
-                e.comment(s.tg, s.p)
+                let ca = $(this).next().slideDown(200);
+                $(this).hide()
+                // e.comment(s.tg, s.p)
             });
+            this.p.find("[data-pst-rmv]").on("click", function (ev) {
+                ev.preventDefault();
+                let c = $(this).html();
+                e.prepare1($(this).empty().html("Deleting...").addClass("d-flex gap-2"));
+                e.xhr("post_actions", {type: "dl", target: s.tg}).then(res => {
+                    if (res.success) {
+                        s.p.slideUp(200)
+                        setTimeout(_ => s.p.remove(), 300);
+                    }
+                })
+            });
+            s.p.find("[data-cmt-sec] form")
+                .submit(function (ev) {
+                    ev.preventDefault();
+                    let si = $(this).find(".smart-input"),
+                        st = e.ui.form.process_smart_input(si),
+                        fl = $(this).find(".form-loader");
+                    if (!st) return;
+                    fl.toggleClass("loading")
+                    e.xhr("new_comment", {target: s.tg, status: st})
+                        .then(res => {
+                            fl.toggleClass("loading")
+                            if (res.success) {
+                                si.empty().removeClass("has-content");
+                                this.reset();
+                                s.r_c()
+                            }
+                        });
+                });
         },
         s_r(t) {
-            e.xhr("post_reaction", {
+            return e.xhr("post_reaction", {
                 type: t,
                 target: this.tg
             });
         },
         r_c() {
-            e.xhr("rc_c", {
-                target: this.tg
-            }).then(res => {
-                let d;
-                if (res.success) {
-                    this.ca.empty();
-                    if (res.data.empty) {
-                        d = $(res.data.content);
-                        this.ca.html(d);
-                        e.handle(d)
-                    } else {
-                        res.data.content.forEach(c => {
-                            e.inject($(c), this.ca);
-                        })
+            let cs = this.ca,t = this.tg;
+            function lct() {
+                e.xhr("load_comments", {target: t}).then(res => {
+                    cs.empty();
+                    if (res.success) {
+                        let dt = $(res.data)
+                        cs.html(dt)
                     }
-                }
-            })
+                });
+            }
+
+            lct();
         }
     };
     (e.post.init = function (p) {
@@ -1763,15 +1805,26 @@
                                                 </svg>`)
         }
         inp.focus();
-    }).on("click","[data-update-link]",function (ev){
+    }).on("click", "[data-update-link]", function (ev) {
         ev.preventDefault();
         e.prepare($(".update-content").empty());
-        e.xhr("update_link",{target:$(this).data("update-link")}).then(res=>{
-            if (res.success){
+        e.xhr("update_link", {target: $(this).data("update-link")}).then(res => {
+            if (res.success) {
                 let d = $(res.data)
                 $(".update-content").html(d)
             }
         })
+    }).on("click", "[data-smv-toggle=collapse]", function (e) {
+        e.preventDefault();
+        let it = $(this);
+        let t = $(this).data("smv-target") || $(this).attr("href");
+        if ($(this).hasClass("show")) {
+            $(t).slideUp(200);
+            setTimeout(_ => it.removeClass("show"))
+        } else {
+            $(t).slideDown(200);
+            setTimeout(_ => it.addClass("show"), 300)
+        }
     })
 
 });

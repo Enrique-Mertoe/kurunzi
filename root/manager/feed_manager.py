@@ -13,6 +13,7 @@ from .db_manager import Modifier
 
 class FeedManager:
     REACTION_LIKE = "rpl"
+    ACTION_DELETE = "dl"
 
     def __init__(self):
         ...
@@ -107,6 +108,10 @@ class FeedManager:
             temp = cls._prepare_post(p)
             r.append(temp.render())
         return r
+
+    @classmethod
+    def delete_post(cls, target):
+        return PDO.get_instance(T_POSTS).delete(p_id=target)
 
     @classmethod
     def handle_likes(cls, post_id) -> tuple:

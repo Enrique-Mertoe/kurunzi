@@ -76,7 +76,7 @@ class Xhr:
             return cls._xhr_response()
         a = {}
         if rdr:
-            a["rdr"] = url_for("main.index") if rdr == 1 else rdr
+            a["rdr"] = url_for("main.auth_begin") if rdr == 1 else rdr
         if tag == "register":
             a["redirect"] = url_for("auth.start_up", step="start")
 
@@ -148,6 +148,18 @@ class Xhr:
         res = None
         if ty == Feed.REACTION_LIKE:
             suc, res = Feed.handle_likes(tar)
+
+        return cls._xhr_response(success=suc, data=res)
+
+    @classmethod
+    def post_actions(cls):
+        d = req.form
+        ty = d.get("type")
+        tar = d.get("target")
+        suc = None
+        res = None
+        if ty == Feed.ACTION_DELETE:
+            suc = Feed.delete_post(tar)
 
         return cls._xhr_response(success=suc, data=res)
 

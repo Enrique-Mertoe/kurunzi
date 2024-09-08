@@ -35,9 +35,10 @@ DATABASE_CONFIG = {
 APP_CONFIG = {
     "config": {
         "site_url": SITE_URL,
-        "app_name": "kEye",
+        "app_name": "Tuiseme",
         "title": "Kenya Today",
-        "logo": SITE_URL + "/file_manager/images/logo.svg"
+        "logo": SITE_URL + "/file_manager/images/logo.svg",
+        "fav": SITE_URL + "/file_manager/images/fav.png"
     },
     "files": {
         "images": SITE_URL + "/file_manager/images",

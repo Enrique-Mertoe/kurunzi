@@ -38,7 +38,7 @@ def updates():
     temp.page_config(title="Updates", url="updates")
     departments = uM.get_users({"account_type": "p"})
     temp.add_data(departments=departments)
-    return Renderer.from_template(temp, mini_sidebar=True)
+    return Renderer.from_template(temp, mini_sidebar=True, collapse_endbar=True)
 
 
 @main.route("/corruption", methods=["POST", "GET"])
@@ -143,3 +143,12 @@ def _xhr(action):
     return xhr.invalid_action()
 
 
+@main.route("/auth_begin")
+def auth_begin():
+    tag = "auth_begin"
+    user = uM.selected_account()
+    if not user:
+        return redirect(url_for("auth.welcome"))
+    temp = Template(name=tag, category="home")
+    temp.page_config(title=f"Premium", url=tag, name=tag)
+    return Renderer.from_template(temp)

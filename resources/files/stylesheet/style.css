@@ -602,47 +602,11 @@ html {
 .feed-comment-area .comment-list {
     position: relative;
     padding-left: .5rem;
+    max-height: 300px;
+    overflow: auto;
+    scrollbar-width: thin;
 }
 
-.feed-comment-area .comment-item {
-    font-size: .75rem;
-    /*margin-left: 1rem;*/
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-}
-
-.feed-comment-area .comment-list::before {
-    position: absolute;
-    left: .5rem;
-    height: 100%;
-    width: .1rem;
-    background: gray;
-    content: "";
-    cursor: auto;
-}
-
-.feed-comment-area .comment-item::before {
-    content: "";
-    left: .8rem;
-    width: .8rem;
-    height: .1rem;
-    background: gray;
-    margin-right: .2rem;
-    z-index: 2;
-    cursor: auto;
-
-}
-
-.feed-comment-area .comment-item::after {
-    position: absolute;
-    content: "";
-    left: 1rem;
-    width: .1rem;
-    height: .1rem;
-    background: gray;
-    /*border-radius: 50%;*/
-}
 
 .feed-comment-area .feed-add-comment {
     --clr-rgb: .1;
@@ -2133,4 +2097,16 @@ html {
 
 .nav.nav-bottom-line .nav-item {
     margin-bottom: -2px;
+}
+[data-cmt-sec]{
+    display: none;
+}
+.smv-logo img{
+    height: 40px;
+}
+.smv-logo-large img{
+    height: 100px;
+}
+.post-menu{
+    min-width: 300px;
 }
