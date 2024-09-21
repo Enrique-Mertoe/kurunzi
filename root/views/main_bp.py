@@ -21,7 +21,7 @@ def index():
 
     template.page_config(title=Template.TITLE_DEFAULT, url="", name=tag)
 
-    return Renderer.from_template(template, load_posts=True)
+    return Renderer.from_template(template, load_posts=True, collapse_endbar=False)
 
 
 @main.route("/chat")
@@ -47,6 +47,17 @@ def updates():
 def doc_repo():
     user = uM.current_user()
     tag = "doc_repo"
+    if not user:
+        return redirect(url_for("auth.welcome"))
+    temp = Template(category="doc_repo")
+    temp.page_config(title="", url=tag)
+    return Renderer.from_template(temp, mini_sidebar=True, collapse_endbar=True)
+
+
+@main.route("/feedback-&-response", methods=["POST", "GET"])
+def feed_response():
+    user = uM.current_user()
+    tag = "feedback-&-response"
     if not user:
         return redirect(url_for("auth.welcome"))
     temp = Template(category="doc_repo")
@@ -121,7 +132,7 @@ def notifications():
 
     temp = Template(category=tag)
     temp.page_config(title=f"Notifications", url=tag, name=tag)
-    return Renderer.from_template(temp, load_notes=True)
+    return Renderer.from_template(temp, load_notes=True, collapse_endbar=False)
 
 
 @main.route("/premium", methods=["GET", "POST"])

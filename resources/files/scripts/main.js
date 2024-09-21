@@ -79,6 +79,14 @@
                     <span class="border-spinner"></span>
                 </div>`);
         },
+        prepare2(e, r) {
+            if (r) e.find(".prep-area").remove();
+            else
+                e.html(
+                    `<div class="vstack prep-area justify-content-center align-items-center">
+                    <span class="border-spinner"></span>
+                </div>`);
+        },
         load_pages: () => {
             $.post(
                 window.location.href,
@@ -1841,31 +1849,44 @@
             setTimeout(_ => it.addClass("show"), 300)
         }
     }).on("click", "[data-s-p]", function (ev) {
-                ev.preventDefault();
-                let user = $(this).data("");
-                e.ui.modal_default(function (md) {
-                    let c = $("<div></div>")
-                    md.content(c)
-                    e.prepare(c)
-                    e.xhr("up_manager")
-                        .then(res => {
-                            if (res.success) {
-                                let d = $(res.data);
-                                c.empty().html(d);
-                                mdf(d, md.dismiss)
-                            }
-                        })
+        ev.preventDefault();
+        let user = $(this).data("");
+        e.ui.modal_default(function (md) {
+            let c = $("<div></div>")
+            md.content(c)
+            e.prepare(c)
+            e.xhr("up_manager")
+                .then(res => {
+                    if (res.success) {
+                        let d = $(res.data);
+                        c.empty().html(d);
+                        mdf(d, md.dismiss)
+                    }
                 })
+        })
 
-                function mdf(d,cb) {
-                    d.find("[data-tg]").on("click", function (ev) {
-                        ev.preventDefault()
-                        let val = $(this).data("v");
-                        $(".up-search").val(val)
-                        e.prepare($(".up-r-p"))
-                       cb()
-                    })
+        function mdf(d, cb) {
+            d.find("[data-tg]").on("click", function (ev) {
+                ev.preventDefault()
+                let val = $(this).data("v");
+                $(".up-search").val(val)
+                cb()
+            })
+        }
+    }).on("click", "[data-tg]", function (ev) {
+        ev.preventDefault()
+        let val = $(this).data("tg"),
+            out = $(".up-r-p")
+        e.prepare2(out)
+        e.xhr("update_item_content", {target: val})
+            .then(res => {
+                if (res.success) {
+                    let data = $(res.data)
+                    out.html(data)
+                } else {
+                    out.html("")
                 }
             })
+    })
 
 });

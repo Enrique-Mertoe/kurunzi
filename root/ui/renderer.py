@@ -10,6 +10,10 @@ class Renderer:
 
     @staticmethod
     def from_template(temp: Template, **options):
+        if options.get("collapse_endbar") == None:
+            options.update({
+                "collapse_endbar": True
+            })
         return Renderer()._builder(temp, **options)
 
     @staticmethod

@@ -283,3 +283,23 @@ class Xhr:
     @staticmethod
     def invalid_action():
         return Xhr._xhr_response()
+
+    @classmethod
+    def update_item_content(cls):
+        target = req.form.get("target")
+        if not target:
+            return cls._xhr_response()
+        temp = Template(category="updates", name="update_item_content", render_type=Template.RENDER_CONTENT_ONLY)
+        temp.add_data(target=cls._formart_uic(target))
+        return cls._xhr_response(success=True, data=temp.render())
+
+    @staticmethod
+    def _formart_uic(text):
+        return {
+            "rac": "Received /Allocations",
+            "plb": "plans/Budget",
+            "ext": "Expense/Tenders",
+            "mca": "MCA office",
+            "cecm": "CECM Office",
+            "governor": "Governor Office"
+        }.get(text, text)

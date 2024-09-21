@@ -1,96 +1,23 @@
 <div class="hstack align-items-start">
-    <div class="col-3 border-end" style="min-height: 95vh;">
-        <div class="card update-bar">
-            <ul class="nav gap-2">
-                <li class="nav-item">
-                    <a class="nav-link">
-                        National government
-                    </a>
 
-                    <ul class="nav border-start ms-2 ps-2 py-3 gap-2">
-                        <li data-update-link="executive" class="nav-item">
-                            <a href="" class="nav-link">The Executive</a>
-                        </li>
-                        <li data-update-link="parliamentary" class="nav-item">
-                            <a href="" class="nav-link">Parliamentary</a>
-                        </li>
-                        <li data-update-link="judiciary" class="nav-item">
-                            <a href="" class="nav-link">The Judiciary</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-
-                    <a class="nav-link">
-                        County Government
-                    </a>
-
-                    <ul class="nav border-start ms-2 ps-2 py-3 gap-2">
-                        <li data-update-link="c_assembly" class="nav-item">
-                            <a href="" class="nav-link">County Assembly</a>
-                        </li>
-                        <li data-update-link="c_executive" class="nav-item">
-                            <a href="" class="nav-link">County Executive </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="py-1 mt-3 border-top d-none">
-                <Span class="h4 text-success fw-bold">Ministries</Span>
-            </div>
-            <ul class="nav gap-2 d-none">
-                {% for dep in data.departments %}
-                <li class="nav-item">
-
-                    <div class="card bg-transparent shadow-none pointer py-3 bg-secondary-soft-hover card-body">
-                        <span>{{dep.fullname}}</span>
-                        <div class="position-absolute top-50 me-1 translate-middle-y end-0">
-                                            <span class="p-2 btn rounded-circle ">
-                                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                                                  <path fill-rule="evenodd"
-                                                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-                                                </svg>
-                                            </span>
-                        </div>
-                    </div>
-                </li>
-
-                {%endfor%}
-
-                <li class="nav-item">
-
-                    <div class="card bg-transparent text-primary text-capitalize shadow-none pointer py-3 bg-secondary-soft-hover card-body">
-                        <span>see more</span>
-                        <div class="position-absolute top-50 me-1 translate-middle-y end-0">
-                            <span class="p-2 btn rounded-circle ">
-                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                    class="bi bi-three-dots" viewBox="0 0 16 16">
-                                  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
-                                </svg>
-                            </span>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
     <div class="col ">
-        <div class="vstack align-items-center">
+        <div
+                style="background-image: url(/static/images/p1.png);"
+                class="vstack py-4 bg-secondary-soft align-items-center">
             <h2>
-                Public Document repository
+                FeedBack and Responses
             </h2>
-            <p>View documentation from various government departments.</p>
+            <p>View feedbacks from different departments</p>
             <form class="rounded-pill card  col-md-6" action="">
                 <div class="hstack">
                     <input type="text" class="form-control shadow-none border-0 px-4 p-3 bg-transparent"
-                           placeholder="Search by department ...">
+                           placeholder="Search...">
                 </div>
             </form>
-            <div class="vstack">
-                {% include "empty/content.html"%}
-            </div>
+
+        </div>
+        <div class="vstack">
+            {% include "empty/content.html"%}
         </div>
     </div>
 </div>

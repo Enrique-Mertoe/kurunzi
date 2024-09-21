@@ -1,10 +1,10 @@
-<div class="main-end-bar">
+<div class="main-end-bar border-start">
     <div class="endbar sticky-top">
         <div class="endbar-content">
             <div class="vstack">
                 <div class="py-1">
-                    <div class="px-2">
-                        <div class="btn studio-btn btn-outline-dark align-items-center justify-content-center rounded-pill hstack gap-2">
+                    <div class="">
+                        <a data-url="{{url_for('main.updates')}}" href="/docs_repo" class="btn studio-btn btn-outline-dark align-items-center justify-content-center rounded-pill hstack gap-2">
                             <i class="">
                                 <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
@@ -18,23 +18,34 @@
                                     </g>
                                 </svg>
                             </i>
-                            <div class="fw-bold small-hide">Create</div>
-                        </div>
+                            <div class="fw-bold small-hide">Document Repo</div>
+                        </a>
                     </div>
                 </div>
-                <div class=" mb-3">
-                    <div class="card py-1 prem-card-small card-body rounded-4 bg-transparent">
-                        <div class="hstack justify-content-between">
-                            <span class="fw-bold">Subscribe to Premium</span>
-                            <span class="position-relative">
-                            <img class="img-fluid" src="{{'star.svg' | file_image}}" alt="">
-                        </span>
-                        </div>
-                        <span>
-                                Subscribe to unlock new features.
-                                <span class="btn gradient-1 btn-success fw-bold text-dark rounded-pill py-1">Subscribe</span>
-                            </span>
-                    </div>
+                <div class="trending nav-s mt-3">
+                    <span class="fw-bold">Trending now</span>
+                    <ul class="trend-list nav">
+                        <li class="nav-item trend-item">
+                            <a href="#!" class="nav-link">
+                                <div class="hstack align-items-start gap-2">
+                                    <div class="col-4">
+                                        <div class="card card-body p-0">
+                                            <img class="card-img img-fluid" src="public/images/01.jpg" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="vstack">
+                                        <span class="fw-bold">Police officer shot dead near Wote ...</span>
+                                        <div class="hstack">
+                                            <span class="text-primary">@mwambaz</span>
+                                            <span class="smaller">. Tue May 13</span>
+                                        </div>
+                                        <span class="text-primary">see more</span>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <ul class="nav nav-ls">
                     <li class="nav-item">
@@ -109,31 +120,7 @@
                 </div>
             </div>
 
-                <div class="trending nav-s mt-3">
-                    <span class="fw-bold">Trending now</span>
-                    <ul class="trend-list nav">
-                        <li class="nav-item trend-item">
-                            <a href="#!" class="nav-link">
-                                <div class="hstack align-items-start gap-2">
-                                    <div class="col-4">
-                                        <div class="card card-body p-0">
-                                            <img class="card-img img-fluid" src="public/images/01.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="vstack">
-                                        <span class="fw-bold">Police officer shot dead near Wote ...</span>
-                                        <div class="hstack">
-                                            <span class="text-primary">@mwambaz</span>
-                                            <span class="smaller">. Tue May 13</span>
-                                        </div>
-                                        <span class="text-primary">see more</span>
 
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
 
         </div>
