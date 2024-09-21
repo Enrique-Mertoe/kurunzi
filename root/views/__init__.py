@@ -1,3 +1,4 @@
+import random
 import re
 import typing as t
 from flask import Flask
@@ -15,6 +16,7 @@ from datetime import datetime as dt
 
 from settings import APP_CONFIG
 from root.ui.jinja import UiUser
+from random import randint
 
 
 def register_urls(app: Flask):
@@ -154,6 +156,12 @@ class _JinjaFilters:
         match = re.sub(r"(__link__|__hash__)\S+", lambda match1: mt(match1.group()), text)
         print(match)
         return match
+
+
+def generate_username():
+    random_number = randint(10000, 99999)
+    username = f'user{random_number}'
+    return username
 
 
 class FileProp:

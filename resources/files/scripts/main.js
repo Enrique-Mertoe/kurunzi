@@ -370,7 +370,7 @@
                         if (s.lb.hasClass("active")) {
                             c.html(Number((c.text() || 0) + 1))
                         } else {
-                            c.html(Number((c.text() || 0)-1) || "")
+                            c.html(Number((c.text() || 0) - 1) || "")
                         }
                     }
                 })
@@ -418,7 +418,8 @@
             });
         },
         r_c() {
-            let cs = this.ca,t = this.tg;
+            let cs = this.ca, t = this.tg;
+
             function lct() {
                 e.xhr("load_comments", {target: t}).then(res => {
                     cs.empty();
@@ -712,7 +713,16 @@
                 cb({
                     onStart: onStart,
                     onClose: onClose,
-                    content: ct
+                    content: ct,
+                    dismiss() {
+                        m.removeClass("show");
+                        if (cl) {
+                            cl();
+                        }
+                        setTimeout(() => {
+                            m.remove()
+                        }, 300);
+                    }
                 });
                 setTimeout(() => {
                     m.addClass("show");
@@ -1152,6 +1162,11 @@
                 let ui = upm();
                 ui.uploading()
                 let fd = new FormData(this.f[0]);
+                let med = this.f.find("[data-media-input]").val();
+                if (!med) {
+                    e.alert("Select media file (Image/Video)")
+                    return
+                }
                 fd.append("status", this.gfs())
                 $.post({
                     url: e.smv_url("_xhr/studio"),
@@ -1160,12 +1175,12 @@
                     contentType: false
                 }).then(res => {
                     if (res.success) {
-                        console.log(res.data)
                         let c = $(res.data)
                         $(".feed-list").prepend(c);
                         e.handle(c);
                         e.post(c)
-
+                    } else {
+                        e.alert("Unable to create post!");
                     }
                     ui.terminate()
                 })
@@ -1617,7 +1632,7 @@
         }
 
         function n(fs) {
-            fs.find(".form-selector-options").show();
+            fs.find(".form-selector-options").show()
 
             setTimeout(() => {
                 fs.addClass("open")
@@ -1825,6 +1840,32 @@
             $(t).slideDown(200);
             setTimeout(_ => it.addClass("show"), 300)
         }
-    })
+    }).on("click", "[data-s-p]", function (ev) {
+                ev.preventDefault();
+                let user = $(this).data("");
+                e.ui.modal_default(function (md) {
+                    let c = $("<div></div>")
+                    md.content(c)
+                    e.prepare(c)
+                    e.xhr("up_manager")
+                        .then(res => {
+                            if (res.success) {
+                                let d = $(res.data);
+                                c.empty().html(d);
+                                mdf(d, md.dismiss)
+                            }
+                        })
+                })
+
+                function mdf(d,cb) {
+                    d.find("[data-tg]").on("click", function (ev) {
+                        ev.preventDefault()
+                        let val = $(this).data("v");
+                        $(".up-search").val(val)
+                        e.prepare($(".up-r-p"))
+                       cb()
+                    })
+                }
+            })
 
 });

@@ -1,6 +1,51 @@
-{%if data.config%}
-{%set config = data.config%}
-{%include "updates/" + config.page + ".html" %}
-{%else%}
-{%include "updates/component.html"%}
-{%endif%}
+<div style="background-color: rgba(128,0,0,0.36)" class="vstack py-2 gap-2">
+    <div class="hstack gap-2 mx-auto">
+        <button class="btn btn-danger">
+            Governor
+        </button>
+        <button class="btn btn-danger">
+            CECM
+        </button>
+        <button class="btn btn-danger">
+            MCA
+        </button>
+    </div>
+    <div class=" col-md-6 mx-auto">
+        <form class="rounded-pill p-3 hstack bg-light" action="w-100">
+            <input class="form-control up-search bg-transparent border-0 shadow-none" type="text"
+                   placeholder="search for your Ward...">
+            <div class="col-auto">
+                <i data-s-p class="btn p-3 rounded-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                         class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                        <path fill-rule="evenodd"
+                              d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </i>
+            </div>
+        </form>
+    </div>
+    <div class="hstack gap-2 mx-auto">
+        <button class="btn btn-secondary">
+            Received /Allocations
+        </button>
+        <button class="btn btn-secondary">
+            plans/Budget
+        </button>
+        <button class="btn btn-secondary">
+            Expense/Tenders
+        </button>
+    </div>
+</div>
+<div class="up-r-p">
+    {%if data.config%}
+    {%set config = data.config%}
+
+    {%include "updates/" + config.page + ".html" %}
+
+    {%else%}
+    {%include "updates/component.html"%}
+    {%endif%}
+</div>

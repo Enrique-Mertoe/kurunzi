@@ -1,4 +1,5 @@
 from enum import Enum
+from random import randint
 
 
 class BaseModel:
@@ -98,6 +99,10 @@ class User(BaseModel):
     @property
     def sub_county(self):
         return self._props.get("constituency")
+
+    def random_name(self):
+        random_number = randint(10000, 99999)
+        return f'user{random_number}'
 
 
 class PostInfo(BaseModel):

@@ -118,12 +118,18 @@ class Xhr:
     @classmethod
     def studio(cls):
         files = req.files.getlist("m-files")
-        if files:
-            files = fM(files, "feed").files()
+        if not len(files):
+            return cls._xhr_response(data="No file selected")
+        files = fM(files, "feed").files()
 
-        res, mes = Feed.create_feed(req.form, files)
-        if res:
-            mes = Feed.studio_recently_posted(mes).render()
+        try:
+            res, mes = Feed.create_feed(req.form, files)
+            if res:
+                mes = Feed.studio_recently_posted(mes).render()
+        except Exception as e:
+            print(e)
+            res = False
+            mes = "Something went wrong!"
 
         return cls._xhr_response(success=res, data=mes)
 
@@ -246,6 +252,13 @@ class Xhr:
     def admin(cls):
         suc, res = Admin.init()
         return cls._xhr_response(success=suc, data=res)
+
+    @classmethod
+    def up_manager(cls):
+        t = Template(category="updates", name="departs", render_type=Template.RENDER_CONTENT_ONLY)
+        users = uM.get_users({"account_type": "p"})
+        t.add_data(users=users)
+        return cls._xhr_response(success=True, data=t.render())
 
     @classmethod
     def update_link(cls):

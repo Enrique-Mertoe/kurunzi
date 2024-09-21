@@ -55,6 +55,7 @@ class FeedManager:
             "commenting": data.get("commenting", 0),
             "sharing": data.get("sharing", 0),
             "on_camera": data.get("on-camera", 0),
+            "anonymous": data.get("p_anonymous", 0)
         }
         d.update(kwargs)
         return d
@@ -64,8 +65,7 @@ class FeedManager:
         d = {
             "status": sanitize_input(data.get("status", "")),
             "category": data.get("category", ""),
-            "location": data.get("location", ""),
-
+            "location": data.get("p_location", ""),
         }
         d.update(kwargs)
         return d

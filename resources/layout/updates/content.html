@@ -1,52 +1,52 @@
-<div class="vstack">
+<div class="vstack container">
     <div class="row m-0">
-    <div class="col-3 border-end pe-2 p-0">
-        <div class="card update-bar">
-            <ul class="nav gap-2">
-                <li class="nav-item">
-                    <a href="#ng" data-bs-toggle="collapse" class="nav-link">
-                        National government
-                    </a>
+        <div class="col-3 border-end pe-2 p-0">
+            <div class="card update-bar">
+                <ul class="nav gap-2">
+                    <li class="nav-item">
+                        <a href="#ng" data-bs-toggle="collapse" class="nav-link">
+                            Nairobi Government
+                        </a>
 
-                    <ul id="ng" class="nav border-start ms-2 ps-2 py-3 gap-2 show collapse">
-                        <li data-update-link="executive" class="nav-item">
-                            <a href="" class="nav-link">The Executive</a>
-                        </li>
-                        <li data-update-link="parliamentary" class="nav-item">
-                            <a href="" class="nav-link">Parliamentary</a>
-                        </li>
-                        <li data-update-link="judiciary" class="nav-item">
-                            <a href="" class="nav-link">The Judiciary</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
+                        <ul id="ng" class="nav border-start ms-2 ps-2 py-3 gap-2 show collapse">
+                            <li data-update-link="executive" class="nav-item ">
+                                <a href="" class="nav-link btn bg-danger">Executive offices</a>
+                            </li>
+                            <li data-update-link="parliamentary" class="nav-item ">
+                                <a href="" class="nav-link btn bg-danger">Legislative Services</a>
+                            </li>
+                            <li data-update-link="judiciary" class="nav-item ">
+                                <a href="" class="nav-link btn bg-success">County government</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
 
-                    <a href="#npl" data-bs-toggle="collapse" class="nav-link">
-                        County Government
-                    </a>
+                        <a href="#npl" data-bs-toggle="collapse" class="nav-link">
+                            Commission and independent offices
+                        </a>
 
-                    <ul id="npl" class="nav border-start ms-2 ps-2 py-3 gap-2 collapse">
-                        <li data-update-link="c_assembly" class="nav-item">
-                            <a href="" class="nav-link">County Assembly</a>
-                        </li>
-                        <li data-update-link="c_executive" class="nav-item">
-                            <a href="" class="nav-link">County Executive </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        <ul id="npl" class="nav border-start ms-2 ps-2 py-3 gap-2 collapse">
+                            <li data-update-link="c_assembly" class="nav-item">
+                                <a href="" class="nav-link">County Assembly</a>
+                            </li>
+                            <li data-update-link="c_executive" class="nav-item">
+                                <a href="" class="nav-link">County Executive </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
 
-            <div class="py-1 mt-3 border-top d-none">
-                <Span class="h4 text-success fw-bold">Ministries</Span>
-            </div>
-            <ul class="nav gap-2 d-none">
-                {% for dep in data.departments %}
-                <li class="nav-item">
+                <div class="py-1 mt-3 border-top d-none">
+                    <Span class="h4 text-success fw-bold">Ministries</Span>
+                </div>
+                <ul class="nav gap-2 d-none">
+                    {% for dep in data.departments %}
+                    <li class="nav-item">
 
-                    <div class="card bg-transparent shadow-none pointer py-3 bg-secondary-soft-hover card-body">
-                        <span>{{dep.fullname}}</span>
-                        <div class="position-absolute top-50 me-1 translate-middle-y end-0">
+                        <div class="card bg-transparent shadow-none pointer py-3 bg-secondary-soft-hover card-body">
+                            <span>{{dep.fullname}}</span>
+                            <div class="position-absolute top-50 me-1 translate-middle-y end-0">
                                             <span class="p-2 btn rounded-circle ">
                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
@@ -54,34 +54,35 @@
                                                         d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
                                                 </svg>
                                             </span>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
 
-                {%endfor%}
+                    {%endfor%}
 
-                <li class="nav-item">
+                    <li class="nav-item">
 
-                    <div class="card bg-transparent text-primary text-capitalize shadow-none pointer py-3 bg-secondary-soft-hover card-body">
-                        <span>see more</span>
-                        <div class="position-absolute top-50 me-1 translate-middle-y end-0">
+                        <div class="card bg-transparent text-primary text-capitalize shadow-none pointer py-3 bg-secondary-soft-hover card-body">
+                            <span>see more</span>
+                            <div class="position-absolute top-50 me-1 translate-middle-y end-0">
                             <span class="p-2 btn rounded-circle ">
                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                     class="bi bi-three-dots" viewBox="0 0 16 16">
                                   <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
                                 </svg>
                             </span>
+                            </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+                    </li>
+                </ul>
+            </div>
 
-    </div>
-    <div class="col p-0">
-        <div class="vstack gap-1 update-content">
-            {%include "updates/update-item.html"%}
+        </div>
+        <div class="col p-0">
+            <div class="vstack gap-1 update-content">
+
+                {%include "updates/update-item.html"%}
+            </div>
         </div>
     </div>
-</div>
 </div>

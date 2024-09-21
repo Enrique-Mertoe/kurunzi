@@ -24,15 +24,22 @@
             </div>
             <div class="feed-h-desc">
                 <div class="vstack">
+                    {%if post.anonymous%}
+                    <div class="hstack align-items-end pointer gap-1">
+                        <span class="fw-bold text-capitalize small">{{user.random_name()}}</span>
+                    </div>
+
+                    {%else%}
                     <div class="hstack align-items-end pointer gap-1" data-url="{{user.username}}">
                         <span class="fw-bold text-capitalize small">{{user.fullname}}</span> .
                         <span class="text-secondary smaller">@{{user.username}}</span>
-
-
                     </div>
+                    {%endif%}
                     <div class="hstack gap-2">
                         <span class="smaller feed-time">{{post.posted_on | to_date}}</span>
-                        <span class="fw-bold small text-info">Machakos, kangundo</span>
+                        {%if info[0].location%}
+                        <span class="fw-bold small text-info">{{info[0].location}}</span>
+                        {%endif%}
                     </div>
                 </div>
             </div>

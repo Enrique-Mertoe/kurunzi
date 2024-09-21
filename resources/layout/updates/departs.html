@@ -1,0 +1,7 @@
+<div class="vstack">
+    {%for user in data.users %}
+    <div>
+        <span data-tg ="{{user.uid}}" data-v="{{user.fullname}}" class="btn btn-success-soft-hover">{{user.fullname}}</span>
+    </div>
+    {%endfor%}
+</div>

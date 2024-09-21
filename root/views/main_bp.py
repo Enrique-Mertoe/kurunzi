@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, request as req
+from flask import Blueprint, redirect, url_for, request as req, session
 from ..templates import Template
 from .view_util import method, req_data
 from ..manager import UserManager as uM
@@ -15,8 +15,10 @@ def index():
     tag = "home"
     if not user:
         return redirect(url_for("auth.welcome"))
+
     template = Template(category="home")
     template.add_data(user=user)
+
     template.page_config(title=Template.TITLE_DEFAULT, url="", name=tag)
 
     return Renderer.from_template(template, load_posts=True)
@@ -38,6 +40,17 @@ def updates():
     temp.page_config(title="Updates", url="updates")
     departments = uM.get_users({"account_type": "p"})
     temp.add_data(departments=departments)
+    return Renderer.from_template(temp, mini_sidebar=True, collapse_endbar=True)
+
+
+@main.route("/doc_repo", methods=["POST", "GET"])
+def doc_repo():
+    user = uM.current_user()
+    tag = "doc_repo"
+    if not user:
+        return redirect(url_for("auth.welcome"))
+    temp = Template(category="doc_repo")
+    temp.page_config(title="", url=tag)
     return Renderer.from_template(temp, mini_sidebar=True, collapse_endbar=True)
 
 
@@ -152,3 +165,10 @@ def auth_begin():
     temp = Template(name=tag, category="home")
     temp.page_config(title=f"Premium", url=tag, name=tag)
     return Renderer.from_template(temp)
+
+
+@main.route("/start_a", methods=["POST", "GET"])
+def start_a():
+    rdr = req.args.get("rdr")
+    session.pop("start_a", None)
+    return redirect(rdr)

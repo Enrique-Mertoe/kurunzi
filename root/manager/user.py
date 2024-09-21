@@ -23,6 +23,7 @@ class UserManager(BaseManager):
     @classmethod
     def _start_session(cls, key):
         session[SESSION_TAG] = key
+        session["start_a"] = True
 
     @classmethod
     def end_session(cls):
@@ -78,6 +79,10 @@ class UserManager(BaseManager):
             return user.get("uid"), "Login successful"
         else:
             return False, "Wrong password"
+
+    @classmethod
+    def delete(cls, uid):
+        return PDO.get_instance(T_USERS).delete(uid=uid)
 
     @classmethod
     def user_form(cls, form, form_data) -> tuple:

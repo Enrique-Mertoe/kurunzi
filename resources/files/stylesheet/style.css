@@ -90,7 +90,7 @@ html {
     top: 0;
     right: 0;
     height: 50px;
-    left: var(--side-offset);
+    left: 0;
     border-bottom: var(--bd-header);
     z-index: 120;
     background: rgba(239, 240, 255, 0.5);
@@ -358,12 +358,17 @@ html {
 .main-end-bar {
     flex: 0 0 auto;
     width: 20rem;
+
     /*transform: translateX(var(--eof-end));*/
+}
+.main-end-bar .endbar{
+    z-index: 1;
 }
 
 .main-end-bar .endbar-content {
     padding-top: calc(var(--top-offset) + .5rem);
     position: relative;
+    overflow-y: auto;
 }
 
 .message-area {
@@ -1109,7 +1114,7 @@ html {
 
 [data-page-loader] {
     display: none;
-    z-index: 1050;
+    z-index: 1250;
     background: none;
     position: fixed;
     top: 0;
@@ -1738,11 +1743,11 @@ html {
     top: 100%;
     left: 0;
     right: 0;
-    display: none;
     transform: translateY(-1rem);
     opacity: 0;
     transition: .15s;
     z-index: 3;
+    display: none;
 }
 
 .form-selector.open .form-selector-options {

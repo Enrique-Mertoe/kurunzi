@@ -1,5 +1,6 @@
 (function (w) {
     "use strict";
+    let SMV = w._smv;
     let er = {
         init: () => {
             $(".splash").remove();
@@ -33,7 +34,7 @@
                     $("html").data("fp_ct", null);
                 }
                 $.post({
-                    url:w._smv.smv_url("/_xhr/new_page"),
+                    url: w._smv.smv_url("/_xhr/new_page"),
                     data: fd,
                     processData: false,
                     contentType: false
@@ -54,7 +55,62 @@
             }).on("click", ".new_acc_selector .option-item", function (ev) {
                 $(".new_acc_selector").hide();
                 $(".smv-page-option").find("." + $(this).data("smv-target")).fadeIn()
-            });
+            }).on("click", "[data-smv-admin-user]", function (e) {
+                e.preventDefault();
+                w._smv.bar_load()
+                w._smv.xhr("admin",
+                    {
+                        target: "single_user", "user": $(this).data("smv-admin-user")
+                    }).then(res => {
+                    w._smv.bar_load(!0)
+                    let d = $(res.data);
+                    $(".smv-mg-user-single").html(d)
+                })
+            }).on("click", "[data-user-delete]", function (ev) {
+                ev.preventDefault();
+                let user = $(this).data("user-delete");
+                SMV.confirm("Delete this user", function () {
+                    SMV.bar_load();
+                    SMV.xhr("admin",
+                        {
+                            target: "rmv_user", "user": user
+                        }).then(res => {
+                        w._smv.bar_load(!0)
+                        if (res.success) {
+                            $(".smv-mg-user-single").html("")
+                            SMV.alert("User deleted!");
+                        }
+                    })
+                })
+            }).on("click", "[data-user-adjust]", function (ev) {
+                ev.preventDefault();
+                let user = $(this).data("user-adjust");
+                SMV.ui.modal_default(function (md) {
+                    let c = $("<div></div>")
+                    md.content(c)
+                    SMV.prepare(c)
+                    SMV.xhr("admin", {target: "privileges", user: user})
+                        .then(res => {
+                            if (res.success) {
+                                let d = $(res.data);
+                                c.empty().html(d);
+                                mdf(d, md.dismiss)
+                            }
+                        })
+                })
+
+                function mdf(d,cb) {
+                    d.find("[data-tg]").on("click", function (ev) {
+                        ev.preventDefault()
+                        SMV.xhr("admin", {target: "privileges", user: user, set: true})
+                            .then(res => {
+                                if (res.success) {
+                                    cb()
+                                }
+                            })
+                    })
+                }
+            })
 
 
         }

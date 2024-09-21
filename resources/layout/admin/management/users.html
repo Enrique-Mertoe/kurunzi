@@ -14,26 +14,27 @@
                     </div>
                     <h5>Users</h5>
                     <span></span>
-            </div>
-            <div class="flex-grow-1 overflow-y-auto overflow-x-hidden">
-                <div class="">
-                    <ul class="nav">
-                    {%for user in data.users%}
-                    <li class="nav-item w-100 ">
-                        <a class="nav-link rounded rounded-end-0 w-100 bg-secondary-soft-hover pointer" href="">
-                            <div class="hstack gap-2 position-relative">
-                                <div class="col-auto">
-                                    <div class="avatar">
-                                        <img src="{{user.profile_pic | file_image}}" alt="" class="avatar-img">
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="overflow-hidden position-relative">
-                                        <span class="fw-bold text-dark text-truncate ">{{user.fullname}}</span>
-                                    </div>
-                                </div>
+                </div>
+                <div class="flex-grow-1 overflow-y-auto overflow-x-hidden">
+                    <div class="">
+                        <ul class="nav">
+                            {%for user in data.users%}
+                            <li class="nav-item w-100 " data-smv-admin-user="{{user.uid}}">
+                                <a class="nav-link rounded rounded-end-0 w-100 bg-secondary-soft-hover pointer" href="">
+                                    <div class="hstack gap-2 position-relative">
+                                        <div class="col-auto">
+                                            <div class="avatar">
+                                                <img src="{{user.profile_pic | file_image}}" alt="" class="avatar-img">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="overflow-hidden position-relative">
+                                                <span class="fw-bold text-dark text-truncate ">{{user.fullname}}</span>
+                                            </div>
+                                        </div>
 
-                                <div class="position-absolute end-0 top-0 bottom-0" style="background-color: inherit">
+                                        <div class="position-absolute end-0 top-0 bottom-0"
+                                             style="background-color: inherit">
         <span class="btn rounded-circle p-3 btn-success-soft-hover">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
              class="bi bi-chevron-right" viewBox="0 0 16 16">
@@ -41,18 +42,21 @@
               d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
         </svg>
         </span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    {%endfor%}
-                </ul>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            {%endfor%}
+                        </ul>
+                    </div>
                 </div>
             </div>
-            </div>
         </div>
-        <div class="col">
-
+        <div class="col py-4 px-0 h-100 smv-mg-user-single">
+            <div class="vstack justify-content-center align-items-center py-5">
+                <h3>No user selected</h3>
+                <p class="text-muted">Select user to from sidebar.</p>
+            </div>
         </div>
     </div>
 </div>

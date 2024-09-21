@@ -72,6 +72,14 @@ class BaseTemplate:
         self._name = name
 
     @property
+    def category(self):
+        return self._category
+
+    @category.setter
+    def category(self, category):
+        self._category = category
+
+    @property
     def properties(self):
         return self._props
 

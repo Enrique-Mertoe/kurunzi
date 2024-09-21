@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 09, 2024 at 07:31 AM
+-- Generation Time: Sep 17, 2024 at 09:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `evaluations`
+--
+
+CREATE TABLE `evaluations` (
+  `id` int(100) NOT NULL,
+  `ev_type` text NOT NULL,
+  `userId` varchar(100) NOT NULL,
+  `status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ket_comments`
 --
 
@@ -34,6 +47,25 @@ CREATE TABLE `ket_comments` (
   `status` varchar(100) NOT NULL,
   `date` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ket_comments`
+--
+
+INSERT INTO `ket_comments` (`c_id`, `uid`, `target`, `status`, `date`) VALUES
+('-O6FqwfilCExzqZGbFl9', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'sdddd', 1725785951),
+('-O6Fr-Jjjb_ngn8PmlEy', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'dddd', 1725785966),
+('-O6Fr-jTyM94ugnwiSn7', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'ddd', 1725785968),
+('-O6Fr0nzWoGDTL09PRC5', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'dddd dd d dwdqd', 1725785972),
+('-O6FrKlEB4nDrpY7aCZ3', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'wadau', 1725786054),
+('-O6Gb5D8fy4TlrSveaRm', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'gfsgfwrgwv w ', 1725798573),
+('-O6GbeBOhDIN6MzLWawg', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'ewfqef', 1725798720),
+('-O6GbG18fhq6Lo21R8VE', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'yoo', 1725798617),
+('-O6Gbx4ljQcc9mTKYGcF', '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 'ss', 1725798798),
+('-O6oUt9rcZrUUYyhCExC', '-O3D84iMqUa8iFJL5773', '-O6oUq8cFExGIviwsMBb', 'rtefgerg', 1726383887),
+('-O6oUv-I26i6GX7UYTEg', '-O3D84iMqUa8iFJL5773', '-O6oUq8cFExGIviwsMBb', 'efsdfdfds sdwdf', 1726383895),
+('-O6oUvjm6nyUdkvRLuHR', '-O3D84iMqUa8iFJL5773', '-O6oUq8cFExGIviwsMBb', 'sdfsdfs', 1726383898),
+('-O6oUwFRYQhCX368_dDZ', '-O3D84iMqUa8iFJL5773', '-O6oUq8cFExGIviwsMBb', 'sdfgsdg', 1726383900);
 
 -- --------------------------------------------------------
 
@@ -73,6 +105,16 @@ CREATE TABLE `ket_likes` (
   `target` varchar(100) NOT NULL,
   `l_date` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ket_likes`
+--
+
+INSERT INTO `ket_likes` (`id`, `uid`, `target`, `l_date`) VALUES
+(64, '-O3D84iMqUa8iFJL5773', '-O49UuSR6Rx_Ja9Ke_ao', 1725630307),
+(65, '-O3D84iMqUa8iFJL5773', '-O49UobO4m9mKQxKyVvo', 1725630310),
+(71, '-O3D84iMqUa8iFJL5773', '-O3ui6jdOwFB8nhRPmcS', 1725773526),
+(73, '-O3D84iMqUa8iFJL5773', '-O6oUq8cFExGIviwsMBb', 1726384394);
 
 -- --------------------------------------------------------
 
@@ -119,8 +161,17 @@ CREATE TABLE `ket_posts` (
   `on_camera` int(6) NOT NULL DEFAULT 0,
   `views` int(100) NOT NULL DEFAULT 0,
   `post_type` enum('1','2','3','4','5') NOT NULL DEFAULT '1',
-  `p_likes` int(100) NOT NULL DEFAULT 0
+  `p_likes` int(100) NOT NULL DEFAULT 0,
+  `anonymous` int(6) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ket_posts`
+--
+
+INSERT INTO `ket_posts` (`p_id`, `p_date`, `uid`, `p_type`, `commenting`, `sharing`, `on_camera`, `views`, `post_type`, `p_likes`, `anonymous`) VALUES
+('-O6qionZzyNzsB3HuebS', 1726421356, '-O3D84iMqUa8iFJL5773', 'normal', 0, 0, 0, 0, '1', 0, 0),
+('-O6qkMWKbDuAOPLgl2HL', 1726421760, '-O3D84iMqUa8iFJL5773', 'normal', 0, 0, 0, 0, '1', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -138,6 +189,14 @@ CREATE TABLE `ket_post_info` (
   `filetype` enum('img','vid') NOT NULL,
   `file_size` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ket_post_info`
+--
+
+INSERT INTO `ket_post_info` (`id`, `p_id`, `status`, `category`, `location`, `filename`, `filetype`, `file_size`) VALUES
+(104, '-O6qionZzyNzsB3HuebS', '', 'Health', 'Machakos , Wote road', 'feedImg-eyibdp06-2024-09-15.png', 'img', '373/240'),
+(105, '-O6qkMWKbDuAOPLgl2HL', 'jhyvj jhjh kjbk ', 'Education', 'ssss', 'feedImg-qutgmj5c-2024-09-15.png', 'img', '296/222');
 
 -- --------------------------------------------------------
 
@@ -168,18 +227,18 @@ CREATE TABLE `ket_users` (
 --
 
 INSERT INTO `ket_users` (`uid`, `uname`, `fullname`, `phone`, `email`, `bio`, `password`, `admin`, `county`, `constituency`, `gender`, `joined`, `profile_pic`, `account_type`, `account_category`) VALUES
-('-O35T8MSamFApqWPpw2C', 'imatiss', 'ima tiss', NULL, 'imatiss@gmail.com', NULL, '$2b$12$q2hkkfdUG.uRmpPECKcUB.XkSFcDcgS74NRZkz4q58h26SfalU/3G', 0, 'Nairobi', 'Kibra Sub County', 'female', 1722390452, 'placeholder.jpg', 'n', NULL),
 ('-O3D84iMqUa8iFJL5773', 'allisonmolly', 'allison molly', NULL, 'allisonmolly@gmail.com', NULL, '$2b$12$9MhJP3rb9r4514l5ddShheMxL1byHi7pVyIgEN97kbLRrRh6gICiO', 1, 'Nairobi', 'Kibra Sub County', 'female', 1722519149, 'placeholder.jpg', 'n', NULL),
-('-O3OqrPmXCU9QbHUuGpg', 'dsjfsdjfbskdjfskjdfksjdbfksjbdfksjdbkfsjdsdfsdlknflsdkfnskdnflskdnflsdf', 'dsjf sdjfbskdjf skjdf ksjdbfk sjbd fksjdb kfsjd sdfsdlknfls dkfn skdnfls kdnf lsdf', NULL, 'jamjam@gmail.com', NULL, '$2b$12$bE4yv/AMA78YCl/IyYaBdO5r6Ks.V.3dXpMjR7KqB3jdZWivJE5yu', 0, 'Nairobi', 'Kibra Sub County', 'male', 1722715699, 'placeholder.jpg', 'n', NULL),
-('-O3PCrAX0I0D5_W2z0_Y', 'sdasdasdasd', 'sdasd asdasd', NULL, 'jamjam@gmail.comtss', NULL, '$2b$12$syBe3Pg/OBXG4HlHqITYgOlE117wJbW/z.9.7g9u29ht.mCC/kEti', 0, 'Nairobi', 'Kibra Sub County', 'female', 1722721727, 'placeholder.jpg', 'n', NULL),
 ('-O3PCVF0cPHkYdskcJyq', 'dtewtwetrwet', 'dtewt wetrwet', NULL, 'jamjam@gmail.comt', NULL, '$2b$12$ifCbmufCygiA5cWsHNBzOu6sbW/MRdfF7AXoNQ0G5HAlhA1Pr2OmS', 0, 'Nairobi', 'Kibra Sub County', 'other', 1722721633, 'placeholder.jpg', 'n', NULL),
 ('-O3PD0tQkxgcvvLcPWNB', 'sddfsdf', 'sd dfsdf', NULL, 'jamjam@gmail.comdtss', NULL, '$2b$12$KU2uMpORjmws3Sv9xDNVzuNbBE639ibK2mQy7IHFZGClC1MBUhqIq', 0, 'Nairobi', 'Kibra Sub County', 'other', 1722721771, 'placeholder.jpg', 'n', NULL),
 ('-O3PDCmPNeG8hhImnugw', 'dsadasdasd', 'dsad asdasd', NULL, 'jamjam@gmail.comdtssd', NULL, '$2b$12$Po8P8vAa64TtYWYKlEVTtu7xUcQtqgNiCFJtT/TBoX/TIa9cDHNJO', 0, 'Nairobi', 'Kibra Sub County', 'other', 1722721820, 'placeholder.jpg', 'n', NULL),
 ('-O3PDmA0E0mGUP-fU1cP', 'wefwefwefwef', 'wefwef wefwef', NULL, 'jamjam@gmail.fcomdtssd', NULL, '$2b$12$WYkjho8hN2DoaqWQ3raPBOs28y.rbYKb2OrxE1DHLVEdOaO/m7LNu', 0, 'Nairobi', 'Kibra Sub County', 'other', 1722721969, 'placeholder.jpg', 'n', NULL),
 ('-O3PE4OaF92Dde-pvfO5', 'ui', 'ytuj64 u456u', NULL, 'jamjam@gmaikjil.fcomdtssd', NULL, '$2b$12$8kCXfX5SpDSo2JI1gMXu/unluodyUhDUzVUrvM9Ktth3UaKhEWblO', 0, 'Nairobi', 'Kibra Sub County', 'other', 1722722048, 'avatarImg-5ieru8d3-2024-08-06.png', 'n', NULL),
-('-O3ZqWiTy7BIdmEw_VSp', 'umo_wa_ungem', 'umo marko', NULL, 'umomarko@marko.com', NULL, '$2b$12$xLmKWBwpXsMoRYROJNulR.pnaefzhrfqHG5tqwKGL/7NUCsaZQAFa', 0, 'Nairobi', 'Kibra Sub County', 'male', 1722900159, 'avatarImg-wijjbsz7-2024-08-06.png', 'n', NULL),
-('-O3_ACSz_DcuPRsJI8sL', 'security', 'security', NULL, '', 'ss0', '$2b$12$vgJfPSFJTSJ9/aywpl61cuNpD7eA8EAgBUVktG/cp.WJRfpQffwGK', 0, '', '', 'other', 1722905581, 'placeholder.jpg', 'p', 'Ministry of Education'),
-('-O3_BKMupgjWf6N25YMU', 'Assasins', 'Assasins', NULL, 'assasins@gmail.com', 'kjnl', '$2b$12$NfbmjYN82r/X35z5o33S7.quO5Jd0SWJGtMJI6t4mqm1BnDUJKD0u', 0, '', '', 'other', 1722905876, 'placeholder.jpg', 'p', '');
+('-O3uheUEMzbcZi32fY5P', 'Swingsmauno', 'Swings  Mauno', NULL, 'swings@mauno.com', NULL, '$2b$12$7zBqeggmXUJ0CMXKsdiod.to64el27IKf0ceAgsyYai6HM1Aq2e4a', 0, 'Busia (040)', 'Butula', 'male', 1723266935, 'avatarImg-30z06965-2024-08-10.png', 'n', NULL),
+('-O3vlzYV82unn4l544ks', 'lom', 'Abisalom Okoth', NULL, 'abisalomokoth1@gmail.com', NULL, '$2b$12$VseAfffzjtEq9KTMAjCKbuvjss/tkBMqHhJccNyJ127uxJhe3uAs2', 0, 'Kisumu (042)', 'Mohoroni', 'male', 1723284847, 'placeholder.jpg', 'n', NULL),
+('-O480g3Xc6a5oJ0p6b3o', 'MinistryofEducation', 'Ministry of Education', NULL, 'edu@edu.com', 'ubi iuoi ', '$2b$12$TupyooW43JTVODeHvkUvR.x8PtwTJ50TzsN7TcYIbcFMCVRcfgZj6', 0, '', '', 'other', 1723507065, 'placeholder.jpg', 'p', NULL),
+('-O480Np3w5wyCvlLfJ3U', 'MinistryofHealth', 'Ministry of Health', NULL, 'health@go.com', 'sjhskjbs', '$2b$12$It5APy7HFuHCEOMibbduH.g2HasroApmyNcvRFrr.kWMtoaxK/HiO', 0, '', '', 'other', 1723506986, 'avatarImg-fs9ew4xx-2024-08-13.png', 'p', NULL),
+('-O48CDq_EKp7l72Pifb_', 'Jimijimy😘', 'Jimmy Wanjigi', NULL, 'jimi@wanjigi.com', NULL, '$2b$12$BukQTwBuf6YcPgLQl7SGA.Zr4suYeg3a6dK6XWFZEVBQ/aRoRO6nC', 0, 'Bomet (036)', 'Bomet central', 'male', 1723510091, 'placeholder.jpg', 'n', NULL),
+('-O70Hrobj3f8xxidwxQ7', 'president', 'president', NULL, 'info@presidency.com', 'no desc', '$2b$12$PA90NadlOIp1VBRy0cQ4KO41N02qh.3mF2OHUhY1HNdGYzjSoyY4m', 0, '', '', 'other', 1726598577, 'placeholder.jpg', 'p', NULL);
 
 -- --------------------------------------------------------
 
@@ -265,13 +324,13 @@ ALTER TABLE `ket_follow`
 -- AUTO_INCREMENT for table `ket_likes`
 --
 ALTER TABLE `ket_likes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `ket_post_info`
 --
 ALTER TABLE `ket_post_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `ket_views`
