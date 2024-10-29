@@ -1,9 +1,10 @@
 import time
+from pprint import pprint
 
 from .fn import gen_key
 from .db import PDO
 from .util import sanitize_input
-from ..core.const import T_POSTS, T_POSTS_INFO, T_LIKES, T_COMMENTS
+from ..core.const import T_POSTS, T_POSTS_INFO, T_LIKES, T_COMMENTS, T_VIEWS
 from .user import UserManager as uM
 from .file_manager import File
 from ..models import Post, PostInfo, Comment
@@ -54,8 +55,10 @@ class FeedManager:
             "p_type": "normal",
             "commenting": data.get("commenting", 0),
             "sharing": data.get("sharing", 0),
+            "post_type": data.get("post_type", 1),
             "on_camera": data.get("on-camera", 0),
-            "anonymous": data.get("p_anonymous", 0)
+            "anonymous": data.get("p_anonymous", 0),
+            "doc_category": data.get("doc_category")
         }
         d.update(kwargs)
         return d
@@ -94,18 +97,33 @@ class FeedManager:
     def _prepare_post(cls, post: Post) -> Template:
         like = {
             "liked": LikeManager.is_liked(uM.selected_account(), post.post_id),
-            "likes": LikeManager.get_likes(post.post_id)
+            "likes": LikeManager.get_likes(post.post_id),
+            "views": LikeManager.get_views(post.post_id)
         }
         temp = Template(category="xhr/post", name="item", render_type=Template.RENDER_CONTENT_ONLY)
         temp.add_data(post=post, like=like)
         return temp
 
     @classmethod
-    def get_posts(cls, start: int = 0, end: int = 2) -> list:
+    def get_posts(cls, start: int = 0, end: int = 2, config: dict = None) -> list:
         r = []
-        for p in PDO.get_instance(T_POSTS).get(limit=(start, 100)).all:
+        ptype = config.get("post_type", 1)
+        data = {
+            "post_type": ptype
+        }
+        if config.get("uid"):
+            data["uid"] = config.get("uid")
+        if config.get("f_type") == "doc_commented":
+            sql = ("SELECT * FROM ket_posts WHERE post_type = 2 "
+                   "AND p_id IN (SELECT target FROM ket_comments);")
+            posts = PDO.get_instance(T_POSTS).query(sql).all
+        else:
+            posts = PDO.get_instance(T_POSTS).get(data=data, limit=(start, 100)).all
+        print(posts)
+        for p in posts:
             p = cls.f_post(Post(p))
             temp = cls._prepare_post(p)
+            temp.add_data(p_config=config)
             r.append(temp.render())
         return r
 
@@ -171,4 +189,11 @@ class LikeManager:
         d = {"target": target}
         d.update(options)
         res = PDO.get_instance(T_LIKES).get(d)
+        return res.all
+
+    @classmethod
+    def get_views(cls, target, **options):
+        d = {"target": target}
+        d.update(options)
+        res = PDO.get_instance(T_VIEWS).get(d)
         return res.all

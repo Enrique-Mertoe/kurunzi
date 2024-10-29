@@ -1,9 +1,11 @@
 <div class="vstack">
     <div class="hstack px-4 bg-secondary align-items-center">
-        <div class>
-            <img style="height: 50px" class="img-fluid" src="/static/images/rpk.jpg" alt="">
+        <div class="col-auto">
+            <div class="avatar-lg avatar">
+            <img class="avatar-img" src="{{current_user.profile_pic | file_image }}" alt="">
         </div>
-        <div class="mx-auto text-light">
+        </div>
+        <div class="mx-auto text-center py-2 text-light">
             <h3 class="fw-bold text-uppercase">{{current_user.fullname}}</h3>
             <h4 class="text-uppercase">Administrator</h4>
         </div>
@@ -19,7 +21,7 @@
             <div class="col-2 p-0 bg-success" style="min-height: 75vh">
                 <ul class="list-group list-group-flush px-2  ">
                     <li class="list-group-item  px-0 bg-transparent ">
-                        <a class="btn btn-secondary w-100" href="">
+                        <a data-mg-page="documents" class="btn btn-secondary w-100" href="">
                             Documentation
                         </a>
                     </li>
@@ -34,14 +36,14 @@
                         </a>
                     </li>
                     <li class="list-group-item px-0  bg-transparent ">
-                        <a class="btn btn-secondary w-100" href="">
-                            Setting
+                        <a data-mg-page="settings" class="btn btn-secondary w-100" href="">
+                            Settings
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="col">
-                <div class="vstack">
+                <div class="vstack py-1 ep-docs">
                     {% include "empty/content.html"%}
                 </div>
             </div>

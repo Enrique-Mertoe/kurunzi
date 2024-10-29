@@ -1,9 +1,9 @@
 from flask import Blueprint, redirect, url_for, request as req, session
-from ..templates import Template
-from .view_util import method, req_data
+
+from root.ui.renderer import Renderer
 from ..manager import UserManager as uM
 from ..manager.xhr import Xhr as xhr
-from root.ui.renderer import Renderer
+from ..templates import Template
 
 main = Blueprint("main", __name__)
 ajax = Blueprint("xhr", __name__)
@@ -39,7 +39,10 @@ def updates():
     temp = Template(category="updates")
     temp.page_config(title="Updates", url="updates")
     departments = uM.get_users({"account_type": "p"})
-    temp.add_data(departments=departments)
+    users = uM.get_users({
+        "account_category": 1
+    })
+    temp.add_data(departments=departments, users=users)
     return Renderer.from_template(temp, mini_sidebar=True, collapse_endbar=True)
 
 
@@ -84,7 +87,7 @@ def explore():
         return redirect(url_for("auth.welcome"))
     temp = Template(category=tag)
     temp.page_config(title="Corruption | Main", url=tag, name=tag)
-    return Renderer.from_template(temp)
+    return Renderer.from_template(temp, load_posts={"post_type": 2, "f_type": "doc_commented"})
 
 
 @main.route("/settings", methods=["POST", "GET"])
@@ -120,7 +123,9 @@ def timeline(uname):
     temp.properties = {
         "user": t_user
     }
-    return Renderer.from_template(temp, load_posts=True)
+    return Renderer.from_template(temp, load_posts={
+        "uid": t_user.uid
+    }, collapse_endbar=False)
 
 
 @main.route("/notifications", methods=["POST", "GET"])
@@ -133,6 +138,17 @@ def notifications():
     temp = Template(category=tag)
     temp.page_config(title=f"Notifications", url=tag, name=tag)
     return Renderer.from_template(temp, load_notes=True, collapse_endbar=False)
+
+
+@main.route("/feedbacks", methods=["POST", "GET"])
+def feedbacks():
+    tag = "feedbacks"
+    user = uM.selected_account()
+    if not user:
+        return redirect(url_for("auth.welcome"))
+    temp = Template(category=tag)
+    temp.page_config(title=tag, url=tag, name=tag)
+    return Renderer.from_template(temp)
 
 
 @main.route("/premium", methods=["GET", "POST"])

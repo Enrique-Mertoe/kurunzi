@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
+
 :root {
     --clr-main: #eff0ff;
     --clr-pri: #0684bc;
@@ -363,7 +364,8 @@ html {
 
     /*transform: translateX(var(--eof-end));*/
 }
-.main-end-bar .endbar{
+
+.main-end-bar .endbar {
     z-index: 1;
 }
 
@@ -494,7 +496,28 @@ html {
     content: "";
     cursor: pointer;
 }
-
+.feed-media-item.feed-file{
+    height: 100px;
+    overflow: hidden;
+    scrollbar-width: thin;
+}
+.feed-media-item.feed-file .file_preview > *{
+    display: inline-block;
+    border-right: 1px solid rgba(0,0,0,0.05);
+}
+.feed-media-item.feed-file .file_preview.preview_single > *{
+    display: inline-block;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    min-width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.feed-media-item.feed-file .file-controller{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: .5rem;
+}
 .feed-media .scroll-button {
     position: absolute;
     z-index: 1;
@@ -1196,7 +1219,12 @@ html {
     user-select: none;
 }
 
-
+.smv-logo.smv-logo-phone {
+    display: none;
+}
+.p-nav li{
+    flex: 1;
+}
 @media (max-width: 520px) {
     .main-layout {
         --side-offset: 0;
@@ -1205,10 +1233,6 @@ html {
     }
 
     .main-sidebar {
-        display: none;
-    }
-
-    .main-end-bar {
         display: none;
     }
 
@@ -1221,6 +1245,7 @@ html {
         top: auto;
         border-bottom: none;
         border-top: var(--bd-header);
+        z-index: 1001;
     }
 
     .search-bar {
@@ -1231,8 +1256,65 @@ html {
         border-radius: 0;
         min-height: 95vh;
     }
+
+    /*.smv-logo-phone {*/
+    /*    display: block!important;*/
+    /*}*/
+    .hhder {
+        display: none;
+    }
+
+    .smv-logo:not(.smv-logo-phone) {
+        display: none;
+    }
+
+    .smv-logo img {
+        max-height: 30px;
+        margin: auto;
+    }
+
 }
 
+@media (max-width: 620px) {
+    .smv-logo:not(.smv-logo-phone) {
+        display: none;
+    }
+
+    .smv-logo-phone {
+        display: initial!important;
+    }
+
+    .smv-logo img {
+        max-height: 30px;
+        margin: auto;
+    }
+
+    .main-end-bar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        transform: translateX(100%);
+        transition: .2s;
+    }
+
+    .main-end-bar.open {
+        transform: translateX(0);
+        z-index: 1000;
+    }
+
+    .endbar-collapsed .main-end-bar {
+        display: initial;
+        width: initial;
+    }
+
+    .search-bar input {
+        display: none !important;
+    }
+}
 
 .update-bar {
     height: 100vh;
@@ -2105,15 +2187,19 @@ html {
 .nav.nav-bottom-line .nav-item {
     margin-bottom: -2px;
 }
-[data-cmt-sec]{
+
+[data-cmt-sec] {
     display: none;
 }
-.smv-logo img{
+
+.smv-logo img {
     height: 40px;
 }
-.smv-logo-large img{
+
+.smv-logo-large img {
     height: 100px;
 }
-.post-menu{
+
+.post-menu {
     min-width: 300px;
 }

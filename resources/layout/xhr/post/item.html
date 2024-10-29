@@ -2,10 +2,11 @@
 {%set user = post.user %}
 {%set info = post.related_info%}
 {%set me = user.uid == current_user.uid %}
+{%set p_config = data.p_config or {} %}
 
-
+{% if p_config.preview_type == 1%}
 <div data-tag="{{post.post_id}}" class="feed-item">
-    <div class="card card-body">
+    <div data-v-track="{{post.post_id}}" class="card card-body">
         <div class="feed-header">
             <div class="feed-user pe-2">
                 <div class="avatar">
@@ -130,60 +131,39 @@
             <div class="reaction-counter"></div>
             {% include "xhr/post/reaction.html"%}
         </div>
-        <div class="feed-comment-area">
-            <span class="text-muted smaller">Recent comments</span>
-            <div class="comment-list gap-1 vstack">
-                <div class="comment-item gap-1 hstack">
-                    <div class="avatar placeholder avatar-xs"></div>
-                    <span class="fw-bold placeholder px-3"></span>
-                    <span class="placeholder px-4"></span>
-                    <span class="text-muted placeholder px-2 "></span>
-                </div>
-            </div>
-
-            <div data-new-comment="" class="feed-add-comment">
-                <span>+</span>
-                <span>Add comment</span>
-            </div>
-            <div data-cmt-sec>
-                <form class="vstack gap-2">
-
-                    <div class="hstack">
-                        <div class="avatar avatar-xs">
-                            <img class="avatar-img" src="{{current_user.profile_pic | file_image}}" alt="">
-                        </div>
-                        <div contenteditable="true" data-placeholder="Add comment"
-                             class="form-control smart-input border-0 shadow-none"></div>
-                    </div>
-                    <div class="justify-content-between px-1 py-1 border-bottom border-top hstack gap-2">
-                        <div class="hstack gap-2">
-                                    <span class="btn border-0 p-1 shadow-none bg-info-soft-hover text-primary"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24"><path fill="#4db3f6"
-                                                                      d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"></path></svg></span>
-                            <span class="btn border-0 p-1 shadow-none bg-info-soft-hover text-primary">
-                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="24" height="24"
-                                             viewBox="0 0 24 24" class="feather feather-emoticons"><path
-                                                d="M12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 C18.0751322,1 23,5.92486775 23,12 C23,18.0751322 18.0751322,23 12,23 Z M12,21 C16.9705627,21 21,16.9705627 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 Z M15.2746538,14.2978292 L16.9105622,15.4483958 C15.7945475,17.0351773 13.9775544,18 12,18 C10.0224456,18 8.20545254,17.0351773 7.08943782,15.4483958 L8.72534624,14.2978292 C9.4707028,15.3575983 10.6804996,16 12,16 C13.3195004,16 14.5292972,15.3575983 15.2746538,14.2978292 Z M14,11 L14,9 L16,9 L16,11 L14,11 Z M8,11 L8,9 L10,9 L10,11 L8,11 Z"></path></svg>
-                                    </span>
-                            <label class="form-control border-0  hstack">
-
-                                <div class="form-check ms-auto form-switch">
-                                    <input value="1" name="commenting" class="form-check-input" type="checkbox"
-                                           role="switch"
-                                           id="NotiSwitchCheckChecked1">
-                                </div>
-                                <h6 class="mb-0">keep anonymous</h6>
-                            </label>
-
-                        </div>
-                        <div class="form-loader">
-                            <div class="border-spinner"></div>
-                        </div>
-                        <button class="rounded-pill px-3 btn btn-success py-1" type="submit">publish</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+        {% include "xhr/post/comment-ui.html" %}
     </div>
 </div>
+
+
+{% elif p_config.preview_type == "2" %}
+<div data-tag="{{post.post_id}}" class="vstack feed-item w-100 {{post.doc_category | filter_doc_category}}">
+    <div class="card me-0">
+        <div class="hstack gap-1 p-2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M12 7V12L14.5 10.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                          stroke="#000" stroke-width="0.264" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </svg>
+            <span>{{post.posted_on | to_date}}</span>
+        </div>
+        {%for med in info %}
+        <div class="hstack p-3">
+            <i class="text-danger">
+                <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
+                     class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5zM1.6 11.85H0v3.999h.791v-1.342h.803q.43 0 .732-.173.305-.175.463-.474a1.4 1.4 0 0 0 .161-.677q0-.375-.158-.677a1.2 1.2 0 0 0-.46-.477q-.3-.18-.732-.179m.545 1.333a.8.8 0 0 1-.085.38.57.57 0 0 1-.238.241.8.8 0 0 1-.375.082H.788V12.48h.66q.327 0 .512.181.185.183.185.522m1.217-1.333v3.999h1.46q.602 0 .998-.237a1.45 1.45 0 0 0 .595-.689q.196-.45.196-1.084 0-.63-.196-1.075a1.43 1.43 0 0 0-.589-.68q-.396-.234-1.005-.234zm.791.645h.563q.371 0 .609.152a.9.9 0 0 1 .354.454q.118.302.118.753a2.3 2.3 0 0 1-.068.592 1.1 1.1 0 0 1-.196.422.8.8 0 0 1-.334.252 1.3 1.3 0 0 1-.483.082h-.563zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638z"></path>
+                </svg>
+            </i>
+            <span>{{med.filename}}</span>
+            <span data-tag="{{post.post_id}}" data-doc-viewer="{{ [med.filename,'feeds-file-h'] | get_file}}" class="btn btn-danger-soft py-0 ms-auto">View</span>
+        </div>
+        {%endfor%}
+        {% include "xhr/post/comment-ui.html" %}
+    </div>
+</div>
+{%endif%}

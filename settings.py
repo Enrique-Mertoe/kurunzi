@@ -7,7 +7,7 @@ TEMPLATES_FOLDER = BASE_PATH.joinpath("resources", "layout")
 STATIC_FOLDER = BASE_PATH.joinpath("resources", "files")
 
 PORT = 8000
-HOST = "192.168.1.101"
+HOST = "192.168.1.107"
 # HOST = "localhost"
 
 DEBUG = True

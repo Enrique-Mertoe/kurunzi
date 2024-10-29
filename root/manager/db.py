@@ -248,3 +248,9 @@ class _Reference:
         with self._conn.cursor() as cs:
             cs.execute(sql)
             return FetchType(cs.fetchall())
+
+    def query(self, sql, *data):
+        self._conn.ping()
+        with self._conn.cursor(DictCursor) as cs:
+            cs.execute(sql, [*data])
+            return FetchType(cs.fetchall())

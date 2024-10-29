@@ -1,0 +1,71 @@
+<div class="vstack">
+    <div class="hstack gap-2">
+        <div data-bs-toggle="modal" data-bs-target="#modal-new-ward" class="btn btn-success-soft">
+            Add new ward
+        </div>
+        <div data-bs-toggle="modal" data-bs-target="#modal-new-cecm" class="btn btn-success-soft">
+            Add new CECM
+        </div>
+    </div>
+
+    <div id="modal-new-ward" class="modal scale-in  bg-secondary-soft scale-in">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content hs-shadow-3">
+                <div class="modal-header">
+                    <div class="hstack w-100 justify-content-between">
+                        <span></span>
+                        <div class="">
+                            <span data-bs-dismiss="modal" class="btn btn-close rounded-circle p-2 "></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <h4>Create new Ward</h4>
+                    <form  class="vstack ward-user gap-2" action="">
+                        <div class="form-floating">
+                            <input name="name" type="text" class="form-control shadow-none" placeholder="Name">
+                            <label for="">Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input name="email" type="email" class="form-control shadow-none" placeholder="Email">
+                            <label for="">Email</label>
+                        </div>
+                        <input type="text" name="type" value="w" hidden="">
+                        <small class="smaller text-muted">Default password is kurunzi_123</small>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-new-cecm" class="modal scale-in  bg-secondary-soft scale-in">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content hs-shadow-3">
+                <div class="modal-header">
+                    <div class="hstack w-100 justify-content-between">
+                        <span></span>
+                        <div class="">
+                            <span data-bs-dismiss="modal" class="btn btn-close rounded-circle p-2 "></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+                    <h4>Create new CECM</h4>
+                    <form  class="vstack ward-user gap-2" action="">
+                        <div class="form-floating">
+                            <input name="name" type="text" class="form-control shadow-none" placeholder="Name">
+                            <label for="">Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input name="email" type="email" class="form-control shadow-none" placeholder="Email">
+                            <label for="">Email</label>
+                        </div>
+                        <input type="text" value="cecm" name="type" hidden="">
+                        <small class="smaller text-muted">Default password is kurunzi_123</small>
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

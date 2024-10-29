@@ -2,6 +2,8 @@ import os
 
 import pymysql
 from flask import Blueprint, redirect, url_for, request as req, render_template
+
+from ..core.functions import backup_mysql_to_json, restore_json_to_mysql
 from ..templates import Template
 from ..ui.renderer import Renderer
 from ..manager.user import UserManager as uM
@@ -57,35 +59,22 @@ def install():
         return redirect(url_for("main.index"))
     if req.method == "POST":
         conn = None
-        backup_file = BASE_PATH.joinpath("backup.sql")
+        backup_file = BASE_PATH.joinpath("backup.json")
         sql_file = BASE_PATH.joinpath("sql.sql")
 
         try:
-            # Step 1: Backup the current database
-            backup_database(backup_file)
 
-            # Step 2: Connect to the database
             conn = pymysql.connect(
                 host=db["host"],
                 password=db["password"],
                 user=db["user"],
                 database=db["db_name"]
             )
+            backup_mysql_to_json(conn, output_file=backup_file)
             cursor = conn.cursor()
-
-            # Step 3: Drop all tables to empty the database
             drop_all_tables(cursor, conn)
-
-            # Step 4: Execute the new SQL script
             execute_sql_script(cursor, conn, sql_file)
-
-            # Step 5: Check if tables are empty before restoring the backup
-            if ensure_tables_empty(cursor):
-                # Step 6: Restore the backup, filtering out any data-modifying statements
-                restore_backup(backup_file)
-            else:
-                print("Tables are not empty, skipping restoration.")
-
+            restore_json_to_mysql(conn, input_file=backup_file)
             return "Installation and backup restoration completed successfully"
 
         except Exception as e:

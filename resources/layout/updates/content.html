@@ -1,40 +1,15 @@
-<div class="vstack container">
-    <div class="row m-0">
+<div class="vstack">
+    <div class="hstack align-items-start m-0">
         <div class="col-3 border-end pe-2 p-0">
             <div class="card update-bar">
                 <ul class="nav gap-2">
+                    {% for user in data.users %}
                     <li class="nav-item">
                         <a href="#ng" data-bs-toggle="collapse" class="nav-link">
-                            Nairobi County
+                            {{user.name_alias}}
                         </a>
-
-                        <ul id="ng" class="nav border-start ms-2 d-none ps-2 py-3 gap-2 show collapse">
-                            <li data-update-link="executive" class="nav-item ">
-                                <a href="" class="nav-link btn bg-danger">Executive offices</a>
-                            </li>
-                            <li data-update-link="parliamentary" class="nav-item ">
-                                <a href="" class="nav-link btn bg-danger">Legislative Services</a>
-                            </li>
-                            <li data-update-link="judiciary" class="nav-item ">
-                                <a href="" class="nav-link btn bg-success">County government</a>
-                            </li>
-                        </ul>
                     </li>
-                    <li class="nav-item">
-
-                        <a href="#npl" data-bs-toggle="collapse" class="nav-link">
-                            Kisumu County
-                        </a>
-
-                        <ul id="npl" class="nav border-start ms-2 ps-2 py-3 gap-2 collapse">
-                            <li data-update-link="c_assembly" class="nav-item">
-                                <a href="" class="nav-link">County Assembly</a>
-                            </li>
-                            <li data-update-link="c_executive" class="nav-item">
-                                <a href="" class="nav-link">County Executive </a>
-                            </li>
-                        </ul>
-                    </li>
+                    {% endfor%}
                 </ul>
 
                 <div class="py-1 mt-3 border-top d-none">
@@ -80,7 +55,6 @@
         </div>
         <div class="col p-0">
             <div class="vstack gap-1 update-content">
-
                 {%include "updates/update-item.html"%}
             </div>
         </div>

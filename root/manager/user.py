@@ -15,6 +15,7 @@ class UserManager(BaseManager):
     _FORM_REGISTER = "register"
     _FORM_LOGIN = "login"
     __FORM_PAGE = "page"
+    __FORM_ORG = "org"
     __START_1 = "start-up"
 
     def __init__(self):
@@ -85,13 +86,14 @@ class UserManager(BaseManager):
         return PDO.get_instance(T_USERS).delete(uid=uid)
 
     @classmethod
-    def user_form(cls, form, form_data) -> tuple:
+    def user_form(cls, form, form_data, **options) -> tuple:
         if form == cls._FORM_REGISTER:
             res = cls._create_user(cls._prepare_f_data(form_data))
             if res == 100:
                 return False, "Email already used."
             if res:
-                cls._start_session(res)
+                if not options.get("minor"):
+                    cls._start_session(res)
                 return True, "Account created successfully."
             return False, "Unable to create user."
         if form == cls._FORM_LOGIN:
@@ -104,6 +106,12 @@ class UserManager(BaseManager):
         if form == cls.__FORM_PAGE:
             file = [req.files.get("profile_pic")]
             s = cls._create_user(cls._prepare_p_data(form_data))
+            if s and file and file[0]:
+                cls.handle_avatar(file, s)
+            return True if s else False, "sss"
+        if form == cls.__FORM_ORG:
+            file = [req.files.get("profile_pic")]
+            s = cls._create_user(cls._prepare_o_data(form_data))
             if s and file and file[0]:
                 cls.handle_avatar(file, s)
             return True if s else False, "sss"
@@ -129,12 +137,14 @@ class UserManager(BaseManager):
     @staticmethod
     def _prepare_f_data(data: dict):
         return {
-            "fullname": f"{data.get('f-name')} {data.get('l-name')}",
+            "fullname": f"{data.get('f-name')} {data.get('l-name', '')}",
             "password": pM.hash(data.get("u-password", "")),
             "email": data.get("u-email"),
             "gender": data.get("u-gender"),
             "county": data.get("u-county"),
-            "constituency": data.get("u-s-county")
+            "constituency": data.get("u-s-county"),
+            "parent": data.get("parent"),
+            "account_type": data.get("level", "p")
         }
 
     @staticmethod
@@ -148,6 +158,20 @@ class UserManager(BaseManager):
             "constituency": "",
             "account_category": data.get("category"),
             "account_type": "p",
+            "bio": data.get("p-desc")
+        }
+
+    @staticmethod
+    def _prepare_o_data(data: dict):
+        return {
+            "fullname": f"{data.get('p-name')}",
+            "password": pM.hash("kurunzi_123"),
+            "email": f"{data.get('p-mail')}",
+            "gender": "other",
+            "county": "",
+            "constituency": "",
+            "account_category": "manager",
+            "account_type": "mng",
             "bio": data.get("p-desc")
         }
 

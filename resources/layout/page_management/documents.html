@@ -1,0 +1,171 @@
+<div class="vstack">
+    <div class="hstack">
+        <div data-bs-toggle="modal" data-bs-target="#modal-new-doc" class="btn btn-success-soft">
+            Add document
+        </div>
+    </div>
+    <div class="hstack align-items-start gap-2">
+        <div class="col-md-3">
+            <h5>Financial Year 2024/2025</h5>
+            <ul class="nav-pills nav ms-3  list-group">
+                <a data-bs-toggle="pill" data-post-filter=".allocations_disbursements" class="nav-link active">
+                    Allocations/Disbursements
+                </a>
+                <a data-bs-toggle="pill" data-post-filter=".plans_budgeting" href="" class="nav-link">
+                    Plans/Budgeting
+                </a>
+                <a data-bs-toggle="pill" data-post-filter=".projects_tenders" href="" class="nav-link">
+                    Projects/Tenders
+                </a>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="feeds">
+                <div class="feed-list feed-filter-docs  vstack"></div>
+                <div class="d-none">
+                    {%include 'empty/content.html'%}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-new-doc" class="modal scale-in  bg-secondary-soft scale-in">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content hs-shadow-3">
+                <div class="modal-header">
+                    <div class="hstack w-100 justify-content-between">
+                        <span></span>
+                        <div class="">
+                            <span data-bs-dismiss="modal" class="btn btn-close rounded-circle p-2 "></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body ">
+
+                    <div class="feed-plant-content">
+
+                        <div class="feed-creator">
+
+                            <div class="card border-0 hs-shadow-2 card-body p-1">
+                                <div class="creator-body">
+                                    <div class="hstack  align-items-start gap-1">
+                                        <div class="col">
+                                            <div class="vstack">
+
+                                                <form class="vstack form-studio">
+
+                                                    <div class="mt-2 vstack gap-1">
+                                                        <div class="creator-desc smart-input creator-input"
+                                                             contenteditable="true"
+                                                             data-placeholder="Create post"></div>
+                                                        <div data-dz-display="" class="f-dz"></div>
+                                                        <div class="hstack gap-2">
+                                                            <label class="btn small gap-3 rounded-1 py-1 text-info">
+                                                                <i>
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24"
+                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                                        <g id="SVGRepo_tracerCarrier"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round"></g>
+                                                                        <g id="SVGRepo_iconCarrier">
+                                                                            <path d="M18 6.00002V6.75002H18.75V6.00002H18ZM15.7172 2.32614L15.6111 1.58368L15.7172 2.32614ZM4.91959 3.86865L4.81353 3.12619H4.81353L4.91959 3.86865ZM5.07107 6.75002H18V5.25002H5.07107V6.75002ZM18.75 6.00002V4.30604H17.25V6.00002H18.75ZM15.6111 1.58368L4.81353 3.12619L5.02566 4.61111L15.8232 3.0686L15.6111 1.58368ZM4.81353 3.12619C3.91638 3.25435 3.25 4.0227 3.25 4.92895H4.75C4.75 4.76917 4.86749 4.63371 5.02566 4.61111L4.81353 3.12619ZM18.75 4.30604C18.75 2.63253 17.2678 1.34701 15.6111 1.58368L15.8232 3.0686C16.5763 2.96103 17.25 3.54535 17.25 4.30604H18.75ZM5.07107 5.25002C4.89375 5.25002 4.75 5.10627 4.75 4.92895H3.25C3.25 5.9347 4.06532 6.75002 5.07107 6.75002V5.25002Z"
+                                                                                  fill="currentColor"></path>
+                                                                            <path d="M8 12H16" stroke="currentColor"
+                                                                                  stroke-width="1.5"
+                                                                                  stroke-linecap="round"></path>
+                                                                            <path d="M8 15.5H13.5" stroke="currentColor"
+                                                                                  stroke-width="1.5"
+                                                                                  stroke-linecap="round"></path>
+                                                                            <path d="M4 6V19C4 20.6569 5.34315 22 7 22H17C18.6569 22 20 20.6569 20 19V14M4 6V5M4 6H17C18.6569 6 20 7.34315 20 9V10"
+                                                                                  stroke="currentColor"
+                                                                                  stroke-width="1.5"
+                                                                                  stroke-linecap="round"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </i>
+                                                                Document
+                                                                <input name="m-files" data-media-input="" multiple
+                                                                       hidden="" type="file">
+                                                            </label>
+                                                        </div>
+                                                        <input type="text" hidden="" name="post_type" value="2">
+                                                        <div class="form-floating pointer form-selector position-relative">
+                                                            <label class="d-none">
+                                                                <input name="doc_category" class="input-selector "
+                                                                       type="text" hidden="hidden">
+                                                            </label>
+                                                            <div data-form-selector="" type="text"
+                                                                 class="form-control shadow-none"
+                                                                 placeholder="Category">
+                                            <span class="m-selector-value">
+                                               Choose Category
+                                            </span>
+                                                                <div class="position-absolute top-50 me-1 translate-middle-y end-0">
+                                                                    <span class="p-3 btn rounded-circle ">
+                                                                       <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24"
+                                                                            fill="currentColor"
+                                                                            class="bi bi-chevron-right"
+                                                                            viewBox="0 0 16 16">
+                                                                          <path fill-rule="evenodd"
+                                                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"></path>
+                                                                        </svg>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <label>Category</label>
+                                                            <div class="form-selector-options" style="display: none;">
+                                                                <div class="card bg-light hs-shadow-3 p-0 py-1 card-body">
+                                                                    <ul class="option-list nav">
+                                                                        <li data-smv-target="user_account"
+                                                                            value="alds" class="option-item px-3">
+                                                                            Allocations/Disbursements
+                                                                        </li>
+                                                                        <li data-smv-target="page_account"
+                                                                            value="plb" class="option-item px-3">
+                                                                            Planes/Budgeting
+                                                                        </li>
+                                                                        <li data-smv-target="page_account"
+                                                                            value="prt" class="option-item px-3">
+                                                                            Projects/Tenders
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <label class="form-control border-0  hstack">
+                                                            <div class="form-check d-none ms-auto form-switch">
+                                                                <input value="1" name="p_anonymous"
+                                                                       class="form-check-input" type="checkbox"
+                                                                       role="switch"
+                                                                       id="NotiSwitchCheckChecked1">
+                                                            </div>
+                                                        </label>
+
+
+                                                        <div class="ms-auto hstack mt-3 align-items-center">
+                                                            <div class="me-3">
+                                                                <div class="form-loader d-none">
+                                                                    <div class="border-spinner spinner-small"></div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="submit"
+                                                                    class="btn rounded-pill px-4 btn-primary">Post
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

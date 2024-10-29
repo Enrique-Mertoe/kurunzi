@@ -44,6 +44,28 @@
                     }
                 })
 
+            }).on("submit", ".form-n-org", function (e) {
+                e.preventDefault();
+                let f = this;
+                let fd = new FormData(this), pic;
+                if ((pic = $("html").data("fp_ct"))) {
+                    fd.append("profile_pic", pic, "image.png");
+                    $("html").data("fp_ct", null);
+                }
+                $.post({
+                    url: w._smv.smv_url("/_xhr/new_org"),
+                    data: fd,
+                    processData: false,
+                    contentType: false
+                }).then(res => {
+                    if (res.success) {
+                        f.reset()
+                        SMV.alert("success",function (){
+                            $(f).closest(".modal").modal("hide")
+                        })
+                    }
+                })
+
             }).on("click", "[data-md-component]", function (ev) {
                 ev.preventDefault();
                 // w._smv.prepare(m.find(".modal-component-content").empty());
@@ -99,7 +121,7 @@
                         })
                 })
 
-                function mdf(d,cb) {
+                function mdf(d, cb) {
                     d.find("[data-tg]").on("click", function (ev) {
                         ev.preventDefault()
                         SMV.xhr("admin", {target: "privileges", user: user, set: true})

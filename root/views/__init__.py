@@ -157,6 +157,10 @@ class _JinjaFilters:
         print(match)
         return match
 
+    @staticmethod
+    def filter_doc_category(text: str):
+        return text.lower().replace("/", "_") if text else ""
+
 
 def generate_username():
     random_number = randint(10000, 99999)
@@ -181,7 +185,7 @@ class FileProp:
 
     @property
     def f_type(self) -> str:
-        c = {"img": "ket_images", "vid": "ket_videos"}
+        c = {"img": "ket_images", "vid": "ket_videos", 'file': "ket_docs"}
         return c.get(self._l[2])
 
     @property

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document Preview</title>
+</head>
+<body>
+<style>
+    .chat-container {
+        width: 300px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 20px auto;
+        background-color: #f9f9f9;
+    }
+
+    .message-box {
+        height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .file-upload {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Canvas styles for the PDF */
+    #pdf-render {
+        border-radius: 15px;
+        width: 100%;
+        border: 1px solid #ccc;
+    }
+</style>
+
+<div class="chat-container">
+    <div class="message-box">
+        <canvas id="pdf-render"></canvas>
+    </div>
+
+    <div class="file-upload">
+        <input type="file" id="file-input" accept="application/pdf" />
+        <button onclick="sendDocument()">Send Document</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.13.216/pdf.min.js"></script>
+
+<script>
+    function sendDocument() {
+        const fileInput = document.getElementById('file-input');
+        const file = fileInput.files[0];
+
+        if (file && file.type === "application/pdf") {
+            const fileReader = new FileReader();
+            fileReader.onload = function() {
+                const pdfData = new Uint8Array(this.result);
+                renderPDF(pdfData);
+            };
+            fileReader.readAsArrayBuffer(file);
+        }
+    }
+
+    function renderPDF(pdfData) {
+        const canvas = document.getElementById('pdf-render');
+        const ctx = canvas.getContext('2d');
+
+        // Use PDF.js to load the PDF
+        const loadingTask = pdfjsLib.getDocument({ data: pdfData });
+        loadingTask.promise.then(function(pdf) {
+            // Fetch the first page
+            pdf.getPage(1).then(function(page) {
+                const viewport = page.getViewport({ scale: 1.5 }); // Adjust the scale as needed
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // Render the page into the canvas
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            });
+        }, function(reason) {
+            console.error(reason);
+        });
+    }
+</script>
+
+</body>
+</html>

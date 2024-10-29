@@ -2,6 +2,7 @@
     f(e);
 }(window, function (w) {
     "use strict";
+    let eActions = {};
     let e = {
         init: function () {
             $(document).ready(function () {
@@ -10,6 +11,9 @@
                 // e.scroll_effect()
                 e.rd()
             });
+        },
+        on(action, callback) {
+            eActions[action] = callback
         },
         smv_url(url) {
             return location.origin + "/" + url;
@@ -138,6 +142,7 @@
                         e._vid(this);
                     });
                 }
+
             })();
 
         },
@@ -162,6 +167,79 @@
                         });
                     });
                 observer.observe(this)
+            });
+
+            c.find("[data-v-track]").each(function () {
+                let el = $(this),
+                    tg = el.data("v-track");
+                el.removeAttr("data-v-track");
+                let observer =
+                    new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                if (!el.data('loaded')) {
+                                    e.v_track(this, tg)
+                                    el.data('loaded', true);
+                                }
+                                observer.disconnect();
+                            }
+                        });
+                    });
+                observer.observe(this)
+            });
+            c.find("[data-file-loader]").each(function () {
+                let el = $(this),
+                    tg = el.data("file-loader");
+                el.removeAttr("data-file-loader");
+                let observer =
+                    new IntersectionObserver(entries => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                if (!el.data('loaded')) {
+                                    e.dfl(this, tg)
+                                    el.data('loaded', true);
+                                }
+                                observer.disconnect();
+                            }
+                        });
+                    });
+                observer.observe(this)
+            });
+        },
+        v_track(el, tg) {
+            el = $(el);
+            e.xhr("view_track", {target: tg}).then(res => {
+                if (res.success) {
+                    let n = Number(el.find(".r-views").text()) + 1;
+                    el.find(".r-views").text(n)
+                }
+            });
+        },
+        dfl(el, pdfURL) {
+            el = $(el);
+            let container = el;
+            const loadingTask = pdfjsLib.getDocument(pdfURL);
+            loadingTask.promise.then(function (pdf) {
+                const totalPages = pdf.numPages;
+                for (let pageNumber = 1; pageNumber <= totalPages; pageNumber++) {
+                    pdf.getPage(pageNumber).then(function (page) {
+                        const viewport = page.getViewport({scale: 1.5}); // Adjust the scale as needed
+
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        container.append(canvas);
+
+                        const renderContext = {
+                            canvasContext: ctx,
+                            viewport: viewport
+                        };
+                        page.render(renderContext);
+                    });
+                }
+            }, function (reason) {
+                console.error(reason);
             });
         },
         lazy_load(e, p) {
@@ -198,6 +276,7 @@
             o();
         },
         s_r(u) {
+            eActions?.navigate.call();
             if (e.flags.page && e.flags.page.lock) return;
             let args = u.slice(u.indexOf("?")).slice(1);
             args = args ? "&" + args : "";
@@ -255,7 +334,7 @@
             if (r.load_notes) {
                 e.load_notes()
             }
-            if (r.load_posts) e.load_posts();
+            if (r.load_posts) e.load_posts(0, r.load_posts);
         },
         fl_sg() {
             e.xhr("fl_sg").then(res => {
@@ -306,12 +385,11 @@
                 e.form(this).s()
             });
         },
-        load_posts(i) {
+        load_posts(i, tc) {
             if (!e.load_posts.fn.cl) return;
             e.load_posts.fn.cl = !1;
             e.prepare($(".feed-list"));
-
-            $.post(e.smv_url("_xhr/posts"), {from: i || 0}).then(res => {
+            $.post(e.smv_url("_xhr/posts"), {from: i || 0, ...tc || null}).then(res => {
                 if (res.success) {
                     this.prep_posts(res.data)
                     e.prepare($(".feed-list"), !0);
@@ -322,6 +400,8 @@
             });
         },
         prep_posts(d) {
+            if ($(".feed-filter-docs").length)
+                e.filter_doc_post($(".feed-filter-docs"))
             let c = d.content, ep = d.empty;
             let fl = $(".feed-list"), pr = fl.find(".prep-area");
             let n;
@@ -356,6 +436,18 @@
             return $.post({
                 url: e.smv_url('_xhr/' + u),
                 data: d
+            })
+        },
+        filter_doc_post(el, target) {
+            target = target || ".allocations_disbursements"
+            setTimeout(_ => {
+                el.find(".feed-item").hide()
+                el.find(target).show();
+                if (!el.find(target).length) {
+                    el.next().removeClass("d-none")
+                } else {
+                    el.next().addClass("d-none")
+                }
             })
         }
     };
@@ -1017,6 +1109,9 @@
             if (!$(ev.target).closest(".creator-ignitor").length) {
                 e.studio.close(this)
             }
+        }).on("click", ".creator-trigger", function (ev) {
+            ev.preventDefault();
+            $(".creator-ignitor")[0].click()
         });
 
     })();
@@ -1869,6 +1964,7 @@
             d.find("[data-tg]").on("click", function (ev) {
                 ev.preventDefault()
                 let val = $(this).data("v");
+
                 $(".up-search").val(val)
                 cb()
             })
@@ -1876,17 +1972,177 @@
     }).on("click", "[data-tg]", function (ev) {
         ev.preventDefault()
         let val = $(this).data("tg"),
-            out = $(".up-r-p")
-        e.prepare2(out)
-        e.xhr("update_item_content", {target: val})
+            out = $(".up-r-p"),
+            target = $(this).data("tg-target");
+        e.prepare2(out);
+        let bc = ($(this).data("breadcramp") || "").split("/");
+        if (bc.length) {
+            $(".mdpl .breadcrumb").empty()
+            bc.forEach(bcn => {
+                $(".mdpl .breadcrumb").append(
+                    $(`<li class="breadcrumb-item"><a href="#">${bcn}</a></li>`)
+                )
+            })
+            $(".mdpl .breadcrumb").append(
+                $(`<li class="breadcrumb-item"><a href="#">${$(this).text()}</a></li>`)
+            )
+        }
+
+        e.xhr("update_item_content", {target: val, value: target})
             .then(res => {
                 if (res.success) {
                     let data = $(res.data)
                     out.html(data)
+                    e.load_posts(0, res.load_posts)
                 } else {
                     out.html("")
                 }
             })
+    }).on("click", "[data-smv-toggle=endbar]", function (ev) {
+        ev.preventDefault();
+        let bar = $(".main-end-bar"),
+            expanded = $(this).attr("aria-expanded") === "true";
+
+        let ic = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    </svg>`,
+            i_n = `<svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                           stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g id="Menu / More_Grid_Big">
+                                                <g id="Vector">
+                                                    <path d="M17 18C17 18.5523 17.4477 19 18 19C18.5523 19 19 18.5523 19 18C19 17.4477 18.5523 17 18 17C17.4477 17 17 17.4477 17 18Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M11 18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18C13 17.4477 12.5523 17 12 17C11.4477 17 11 17.4477 11 18Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M5 18C5 18.5523 5.44772 19 6 19C6.55228 19 7 18.5523 7 18C7 17.4477 6.55228 17 6 17C5.44772 17 5 17.4477 5 18Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M17 12C17 12.5523 17.4477 13 18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M5 12C5 12.5523 5.44772 13 6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5C17.4477 5 17 5.44772 17 6Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M11 6C11 6.55228 11.4477 7 12 7C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M5 6C5 6.55228 5.44772 7 6 7C6.55228 7 7 6.55228 7 6C7 5.44772 6.55228 5 6 5C5.44772 5 5 5.44772 5 6Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>`;
+        if (!expanded) {
+            $(this).attr("aria-expanded", true)
+            bar.addClass("open");
+            $(this).find("i").html(ic);
+        } else {
+            $(this).attr("aria-expanded", false)
+            bar.removeClass("open");
+            $(this).find("i").html(i_n);
+        }
+
+
+    }).on("click", "[data-mg-page]", function (ev) {
+        ev.preventDefault();
+        let content = $(".ep-docs"),
+            target = $(this).data("mg-page");
+        e.prepare2(content);
+        e.xhr("d_page_management", {target})
+            .then(res => {
+                if (res.success) {
+                    let data = $(res.data)
+                    content.html(data)
+                    e.load_posts(0, res.load_posts)
+                }
+            })
+    }).on("submit", ".ward-user", function (ev) {
+        ev.preventDefault();
+        e.bar_load();
+        let form = $(this),
+            modal = form.closest(".modal");
+        e.xhr("ward_user", $(this).serialize()).then(res => {
+            e.bar_load(!0)
+            if (res.success) {
+                form[0].reset();
+                modal.modal("hide")
+            }
+        })
+    }).on("click", "[data-doc-viewer]", function (ev) {
+        ev.preventDefault();
+        let modal = e.ui.modal(".modal-doc-view")
+            .attr("data-tag", $(this).data("tag"))
+        modal.modal("show");
+        let file = $(this).data("doc-viewer"),
+            filename = file.split('/').pop();
+        modal.find(".title").text(filename)
+        e.dfl(modal.find(".place-items")[0], file);
+        e.post(modal)
+
+
+    }).on("click", "[data-post-filter]", function (ev) {
+        ev.preventDefault();
+        e.filter_doc_post($(".feed-filter-docs"), $(this).data("post-filter"))
+    })
+    ;
+    e.on("navigate", function () {
+        $("[data-smv-toggle=endbar]").find("i").html(`<svg width="30" height="30" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                           stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <g id="Menu / More_Grid_Big">
+                                                <g id="Vector">
+                                                    <path d="M17 18C17 18.5523 17.4477 19 18 19C18.5523 19 19 18.5523 19 18C19 17.4477 18.5523 17 18 17C17.4477 17 17 17.4477 17 18Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M11 18C11 18.5523 11.4477 19 12 19C12.5523 19 13 18.5523 13 18C13 17.4477 12.5523 17 12 17C11.4477 17 11 17.4477 11 18Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M5 18C5 18.5523 5.44772 19 6 19C6.55228 19 7 18.5523 7 18C7 17.4477 6.55228 17 6 17C5.44772 17 5 17.4477 5 18Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M17 12C17 12.5523 17.4477 13 18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M5 12C5 12.5523 5.44772 13 6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5C17.4477 5 17 5.44772 17 6Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M11 6C11 6.55228 11.4477 7 12 7C12.5523 7 13 6.55228 13 6C13 5.44772 12.5523 5 12 5C11.4477 5 11 5.44772 11 6Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                    <path d="M5 6C5 6.55228 5.44772 7 6 7C6.55228 7 7 6.55228 7 6C7 5.44772 6.55228 5 6 5C5.44772 5 5 5.44772 5 6Z"
+                                                          stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                          stroke-linejoin="round"></path>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>`);
+        if ($(".main-end-bar").hasClass("open")) {
+            $(".main-end-bar").removeClass("open")
+        }
+        $("[data-smv-toggle=endbar]").attr("aria-expanded", false)
+
     })
 
 });

@@ -2,14 +2,17 @@
 {%set page = app.page %}
 <div class="">
     <div class="main-header ">
-        <div class="header-content px-2">
+        <div class="header-content">
 
-            <div class="row m-0">
-                <div class="col-auto">
+            <div class="row m-0 px-0 m-0">
+                <div class="col-auto my-auto hhder">
                     <div class="sidebar-top">
-                        <div class="hstack ps-3 align-items-center">
+                        <div class="hstack align-items-center">
                             <div class="smv-logo">
                                 {% include "utils/logo.html"%}
+                            </div>
+                            <div class="smv-logo smv-logo-phone">
+                                <img src="/static/images/fav.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -29,7 +32,7 @@
                     </span>
                 </span>
                 <div class="col p-0">
-                    <ul class="nav hs-nav header-nav gap-2 justify-content-between justify-content-md-center">
+                    <ul class="nav hs-nav header-nav p-nav">
                         <li class="nav-item ">
                             <a data-url="{{url_for('main.index')}}" href="#"
                                class="nav-link {{'active' if page.name == 'home' else ''}}">
@@ -85,8 +88,26 @@
                                 </i>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a data-url="{{url_for('main.feed_response')}}" class="nav-link" href="">
+                                <i>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                           stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path d="M3 7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2Z"
+                                                  stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                  stroke-linejoin="round"></path>
+                                        </g>
+                                    </svg>
+                                </i>
+                            </a>
+                        </li>
                         <li class="nav-item d-sm-none">
-                            <a href="!#" class="nav-link">
+                            <a href="!#" data-smv-toggle="endbar" class="nav-link dps">
                                 <i>
                                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
@@ -131,23 +152,6 @@
                                 </i>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a data-url="{{url_for('main.feed_response')}}" class="nav-link" href="">
-                                <i>
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                           stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path d="M3 7.2C3 6.07989 3 5.51984 3.21799 5.09202C3.40973 4.71569 3.71569 4.40973 4.09202 4.21799C4.51984 4 5.0799 4 6.2 4H17.8C18.9201 4 19.4802 4 19.908 4.21799C20.2843 4.40973 20.5903 4.71569 20.782 5.09202C21 5.51984 21 6.0799 21 7.2V20L17.6757 18.3378C17.4237 18.2118 17.2977 18.1488 17.1656 18.1044C17.0484 18.065 16.9277 18.0365 16.8052 18.0193C16.6672 18 16.5263 18 16.2446 18H6.2C5.07989 18 4.51984 18 4.09202 17.782C3.71569 17.5903 3.40973 17.2843 3.21799 16.908C3 16.4802 3 15.9201 3 14.8V7.2Z"
-                                                  stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                  stroke-linejoin="round"></path>
-                                        </g>
-                                    </svg>
-                                </i>
-                            </a>
-                        </li>
                     </ul>
 
                 </div>
@@ -185,6 +189,25 @@
                                     </g>
                                 </svg>
                                 <span>admin</span>
+
+                            </a>
+                        </div>
+                        {%endif%}
+                        {%if current_user.account_type == "mng"%}
+                        <div>
+                            <a href="{{url_for('main.feedbacks')}}" class="btn p-1 rounded-pill px-3">
+                                <svg width="34" height="23" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                                     fill="#000000">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <rect x="0" fill="none" width="20" height="20"></rect>
+                                        <g>
+                                            <path d="M18 16V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h13c.55 0 1-.45 1-1zM8 11h1c.55 0 1 .45 1 1s-.45 1-1 1H8v1.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V13H6c-.55 0-1-.45-1-1s.45-1 1-1h1V5.5c0-.28.22-.5.5-.5s.5.22.5.5V11zm5-2h-1c-.55 0-1-.45-1-1s.45-1 1-1h1V5.5c0-.28.22-.5.5-.5s.5.22.5.5V7h1c.55 0 1 .45 1 1s-.45 1-1 1h-1v5.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V9z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <span>Feedbacks</span>
 
                             </a>
                         </div>

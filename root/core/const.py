@@ -8,5 +8,6 @@ T_LIKES = "ket_likes"
 T_COMMENTS = "ket_comments"
 T_FOLLOW = "ket_follow"
 T_NOTES = "ket_notifications"
+T_VIEWS = "ke_views"
 
 NOTE_FOLLOW = "started following you."

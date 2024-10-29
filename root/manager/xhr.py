@@ -1,6 +1,9 @@
-from flask import jsonify, request as req, url_for
+from flask import jsonify, request as req, url_for, session
+
+from .db import PDO
 from .user import UserManager as uM
 from .general import FollowManager as followManager, NoteManager
+from ..core.const import T_POSTS, T_VIEWS
 from ..templates import Template
 from .file_manager import FileManager as fM
 from .feed_manager import FeedManager as Feed
@@ -135,7 +138,15 @@ class Xhr:
 
     @classmethod
     def posts(cls):
-        p = Feed.get_posts(start=req.form.get("from", 0))
+        start = req.form.get("from", 0)
+        config = {
+            "post_type": req.form.get("post_type", 1),
+            "uid": req.form.get("uid"),
+            "preview_type": req.form.get("preview_type", 1),
+            "r_comments": req.form.get("r_comments", 0),
+            "f_type": req.form.get("f_type", "normal"),
+        }
+        p = Feed.get_posts(start=start, config=config)
 
         d = {
             "content": p
@@ -249,6 +260,11 @@ class Xhr:
         return cls._xhr_response(data=res, success=suc, message=res if type(res) is str else None)
 
     @classmethod
+    def new_org(cls):
+        suc, res = uM.user_form("org", req.form)
+        return cls._xhr_response(data=res, success=suc, message=res if type(res) is str else None)
+
+    @classmethod
     def admin(cls):
         suc, res = Admin.init()
         return cls._xhr_response(success=suc, data=res)
@@ -256,7 +272,7 @@ class Xhr:
     @classmethod
     def up_manager(cls):
         t = Template(category="updates", name="departs", render_type=Template.RENDER_CONTENT_ONLY)
-        users = uM.get_users({"account_type": "p"})
+        users = uM.get_users({"account_type": "w"})
         t.add_data(users=users)
         return cls._xhr_response(success=True, data=t.render())
 
@@ -287,11 +303,18 @@ class Xhr:
     @classmethod
     def update_item_content(cls):
         target = req.form.get("target")
+        value = req.form.get("value", "")
         if not target:
             return cls._xhr_response()
         temp = Template(category="updates", name="update_item_content", render_type=Template.RENDER_CONTENT_ONLY)
         temp.add_data(target=cls._formart_uic(target))
-        return cls._xhr_response(success=True, data=temp.render())
+        return cls._xhr_response(success=True, data=temp.render(), load_posts={
+            "uid": value,
+            "post_type": 2,
+            "r_comments": 1,
+            "preview_type": 2,
+
+        })
 
     @staticmethod
     def _formart_uic(text):
@@ -303,3 +326,56 @@ class Xhr:
             "cecm": "CECM Office",
             "governor": "Governor Office"
         }.get(text, text)
+
+    @classmethod
+    def view_track(cls):
+        target = req.form.get("target")
+        client_ip = req.remote_addr
+        views = session.get("post_views", {})
+        if views.get(target) == uM.selected_account():
+            return cls._xhr_response()
+        data = {
+            "target": target,
+            "ip_address": client_ip,
+            "uid": uM.selected_account(),
+            "platform": "web"
+        }
+        if PDO.get_instance(T_VIEWS).get(data=data).single:
+            views[target] = uM.selected_account()
+            session["post_views"] = views
+            return cls._xhr_response()
+        if PDO.get_instance(T_VIEWS).push(data=data):
+            views[target] = uM.selected_account()
+            session["post_views"] = views
+            return cls._xhr_response(success=True, data=None)
+        return cls._xhr_response()
+
+    @classmethod
+    def d_page_management(cls):
+        target = req.form.get("target")
+        if not target:
+            return cls._xhr_response()
+        temp = Template(category="page_management", name=target, render_type=Template.RENDER_CONTENT_ONLY)
+
+        return cls._xhr_response(success=True, data=temp.render(), load_posts={
+            "post_type": 2,
+            "uid": uM.selected_account(),
+            "preview_type": 2,
+            "r_comments": 1
+        })
+
+    @classmethod
+    def ward_user(cls):
+        data = {
+            "u-email": req.form.get("email"),
+            "f-name": req.form.get("name"),
+            'l-name': 'mca',
+            "u-gender": "other",
+            "u-password": "kurunzi_123",
+            "u-county": "",
+            "u-s-county": "",
+            "parent": uM.selected_account(),
+            "level": req.form.get("type", "n")
+        }
+        suc, res = uM.user_form("register", data, minor=True)
+        return cls._xhr_response(success=suc, data=res)

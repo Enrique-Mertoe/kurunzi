@@ -162,7 +162,7 @@ class File:
 class FileManager:
     def __init__(self, files, name_prefix):
         self.__files = files
-        self.__ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+        self.__ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
         self.__f1 = []
         self._name_prefix = name_prefix
         pass

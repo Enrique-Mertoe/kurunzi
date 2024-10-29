@@ -229,6 +229,72 @@
 </div>
 
 
+<div class="modal modal-lg  modal-doc-view scale-in  bg-secondary-soft">
+    <div class="modal-dialog modal-fullscreen-md-down modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content hs-shadow-3">
+            <div class="modal-header">
+                <div class="hstack w-100 justify-content-between">
+                    <span class="title"></span>
+                    <div class="">
+                        <span data-bs-dismiss="modal" class="btn btn-close rounded-circle p-2 "></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body " data-md-content="">
+                <div style="min-height: 200px" class="vstack place-items">
+
+                </div>
+            </div>
+            <div class="modal-footer vstack">
+
+                <div data-new-comment="" class="feed-add-comment btn btn-dark">
+                    <span>+</span>
+                    <span>Add comment</span>
+                </div>
+                <div data-cmt-sec>
+                    <form class="vstack gap-2">
+
+                        <div class="hstack">
+                            <div class="avatar avatar-xs">
+                                <img class="avatar-img" src="{{current_user.profile_pic | file_image}}" alt="">
+                            </div>
+                            <div contenteditable="true" data-placeholder="Add comment"
+                                 class="form-control smart-input border-0 shadow-none"></div>
+                        </div>
+                        <div class="justify-content-between px-1 py-1 border-bottom border-top hstack gap-2">
+                            <div class="hstack gap-2">
+                                    <span class="btn border-0 p-1 shadow-none bg-info-soft-hover text-primary"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24"><path fill="#4db3f6"
+                                                                      d="M8.5,13.5L11,16.5L14.5,12L19,18H5M21,19V5C21,3.89 20.1,3 19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19Z"></path></svg></span>
+                                <span class="btn border-0 p-1 shadow-none bg-info-soft-hover text-primary">
+                                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="24" height="24"
+                                             viewBox="0 0 24 24" class="feather feather-emoticons"><path
+                                                d="M12,23 C5.92486775,23 1,18.0751322 1,12 C1,5.92486775 5.92486775,1 12,1 C18.0751322,1 23,5.92486775 23,12 C23,18.0751322 18.0751322,23 12,23 Z M12,21 C16.9705627,21 21,16.9705627 21,12 C21,7.02943725 16.9705627,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 Z M15.2746538,14.2978292 L16.9105622,15.4483958 C15.7945475,17.0351773 13.9775544,18 12,18 C10.0224456,18 8.20545254,17.0351773 7.08943782,15.4483958 L8.72534624,14.2978292 C9.4707028,15.3575983 10.6804996,16 12,16 C13.3195004,16 14.5292972,15.3575983 15.2746538,14.2978292 Z M14,11 L14,9 L16,9 L16,11 L14,11 Z M8,11 L8,9 L10,9 L10,11 L8,11 Z"></path></svg>
+                                    </span>
+                                <label class="form-control border-0  hstack">
+
+                                    <div class="form-check ms-auto form-switch">
+                                        <input value="1" name="commenting" class="form-check-input" type="checkbox"
+                                               role="switch"
+                                               id="NotiSwitchCheckChecked1">
+                                    </div>
+                                    <h6 class="mb-0">keep anonymous</h6>
+                                </label>
+
+                            </div>
+                            <div class="form-loader">
+                                <div class="border-spinner"></div>
+                            </div>
+                            <button class="rounded-pill px-3 btn btn-success py-1" type="submit">publish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {%endif%}
 
@@ -248,4 +314,8 @@
         </div>
     </div>
 </div>
+
+
+
+
 

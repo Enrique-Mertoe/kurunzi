@@ -1,43 +1,63 @@
+{% set user = data.users[0]%}
 <div style="background-color: rgba(128,0,0,0.36)" class="vstack py-2 gap-2">
-    <div class="hstack gap-2 mx-auto">
-        <button data-tg ="governor"  class="btn btn-danger">
-            Governor Office
-        </button>
-        <button data-tg ="cecm"  class="btn btn-danger">
-            CECM Office
-        </button>
-        <button data-tg ="mca" class="btn btn-danger">
-            MCA office
-        </button>
-    </div>
-    <div class=" col-md-6 mx-auto">
-        <form class="rounded-pill p-3 hstack bg-light" action="w-100">
-            <input class="form-control up-search bg-transparent border-0 shadow-none" type="text"
-                   placeholder="search for your Ward...">
-            <div class="col-auto">
-                <i data-s-p class="btn p-3 rounded-circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                         class="bi bi-chevron-double-down" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                              d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                        <path fill-rule="evenodd"
-                              d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                    </svg>
-                </i>
+    <div class="row m-0 ">
+        <div class="col-lg-auto col-12">
+            <div class="vstack p-2 p-lg-0">
+                <div class="avatar mx-auto avatar-lg">
+                <img class="avatar-img" src="{{user.profile_pic | file_image }}">
+                {%if user.account_type == "p"%}
+                <div class="position-absolute bottom-0 end-0 me-n3">
+                        <span class="text-success">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                 viewBox="0 0 24 24" class="verified-color feather feather-check-circle" title=""
+                                 data-toggle="tooltip" data-original-title="Verified User"><path
+                                    d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg>
+                        </span>
+                </div>
+                {%endif%}
             </div>
-        </form>
+            </div>
+        </div>
+        <div class="col">
+            <div class="vstack gap-2">
+                <div class="hstack gap-2 mx-auto">
+                    <button data-breadcramp="{{user.name_alias}}" data-tg="governor" data-tg-target="{{data.users[0].uid}}" class="btn btn-danger">
+                        Governor Office
+                    </button>
+                    <button data-breadcramp="{{user.name_alias}}" data-tg="cecm" class="btn btn-danger">
+                        CECM Office
+                    </button>
+                    <button data-breadcramp="{{user.name_alias}}" data-tg="mca" class="btn btn-danger">
+                        MCA office
+                    </button>
+                </div>
+                <div class=" col-md-6 mx-auto">
+                    <form class="rounded-pill p-2 hstack bg-light" action="w-100">
+                        <input class="form-control up-search bg-transparent border-0 shadow-none" type="text"
+                               placeholder="search for your Ward...">
+                        <div class="col-auto">
+                            <i data-s-p class="btn p-2 rounded-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                     class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                          d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                    <path fill-rule="evenodd"
+                                          d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                </svg>
+                            </i>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="hstack gap-2 mx-auto">
-        <button data-tg ="rac"  class="btn btn-secondary">
-            Received /Allocations
-        </button>
-        <button data-tg ="plb"  class="btn btn-secondary">
-            plans/Budget
-        </button>
-        <button data-tg ="ext"  class="btn btn-secondary">
-            Expense/Tenders
-        </button>
-    </div>
+</div>
+<div class="hstack mdpl align-items-center w-100 container">
+    <nav class="" aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-dots pt-0">
+            <li class="breadcrumb-item"><a href="#">{{user.name_alias}}</a></li>
+        </ol>
+    </nav>
 </div>
 <div class="up-r-p">
     {%if data.config%}
